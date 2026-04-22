@@ -1,0 +1,3021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Smart Trip – India's premium travel planner. Discover hotels, itineraries, hidden gems, food guides, and exclusive deals for every destination." />
+  <meta name="keywords" content="India travel, Jaipur trip, Rajasthan tour, hotel booking, travel planner, hidden gems India" />
+  <title>Smart Trip – Plan Your Perfect Journey</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS & RESET
+    ============================================================ */
+    :root {
+      --bg-primary:    #06060f;
+      --bg-card:       rgba(255,255,255,0.04);
+      --bg-card-hover: rgba(255,255,255,0.08);
+      --gold:          #d4a853;
+      --gold-light:    #f0c878;
+      --gold-dark:     #a07830;
+      --teal:          #1a9fa8;
+      --teal-light:    #26c6d0;
+      --text-primary:  #f5f0e8;
+      --text-muted:    #8a8090;
+      --text-soft:     #c8bfaf;
+      --border:        rgba(212,168,83,0.18);
+      --border-soft:   rgba(255,255,255,0.07);
+      --radius-sm:     8px;
+      --radius-md:     16px;
+      --radius-lg:     24px;
+      --radius-xl:     36px;
+      --shadow-gold:   0 0 40px rgba(212,168,83,0.15);
+      --shadow-card:   0 8px 40px rgba(0,0,0,0.5);
+      --transition:    0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+    img { display: block; width: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; outline: none; font-family: inherit; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
+
+    /* ============================================================
+       SECTION UTILITY
+    ============================================================ */
+    section { padding: 90px 0; position: relative; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 6px 18px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .section-title span { color: var(--gold); }
+    .section-sub {
+      color: var(--text-soft);
+      font-size: 16px;
+      font-weight: 300;
+      max-width: 560px;
+      margin-bottom: 48px;
+    }
+    .section-header { text-align: center; }
+    .section-header .section-sub { margin-left: auto; margin-right: auto; }
+
+    /* Gold divider */
+    .gold-line {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 16px 0 32px;
+    }
+    .section-header .gold-line { margin: 16px auto 32px; }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Glassmorphism card base */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      transition: var(--transition);
+    }
+    .glass-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-gold);
+    }
+
+    /* Gold button */
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #0a0a0a;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 13px 28px;
+      border-radius: 100px;
+      border: none;
+      transition: var(--transition);
+    }
+    .btn-gold:hover {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(212,168,83,0.35);
+    }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent;
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 11px 26px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+    .btn-outline:hover {
+      background: rgba(212,168,83,0.1);
+      border-color: var(--gold);
+    }
+
+    /* Star rating */
+    .stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; }
+
+    /* Badge */
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      background: rgba(212,168,83,0.15);
+      color: var(--gold);
+      border: 1px solid rgba(212,168,83,0.3);
+    }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    /* SECTION: Navbar */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 18px 0;
+      transition: var(--transition);
+    }
+    nav.scrolled {
+      background: rgba(6,6,15,0.92);
+      backdrop-filter: blur(20px);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    }
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--text-primary);
+      letter-spacing: 2px;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: var(--text-soft);
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { margin-left: 16px; }
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer;
+    }
+    .hamburger span {
+      width: 24px; height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(6,6,15,0.98);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 32px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      color: var(--text-primary);
+      letter-spacing: 3px;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+    .close-menu {
+      position: absolute; top: 24px; right: 24px;
+      background: none; border: none;
+      color: var(--text-primary);
+      font-size: 28px; cursor: pointer;
+    }
+
+    /* ============================================================
+       HERO SECTION
+    ============================================================ */
+    /* SECTION: Hero */
+    #hero {
+      height: 100vh;
+      min-height: 700px;
+      display: flex; align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #06060f 0%, #0d1a2e 40%, #0f1a10 80%, #1a0d06 100%);
+    }
+    /* Animated gradient orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+    .orb-1 { width: 500px; height: 500px; background: #1a4a6e; top: -100px; left: -150px; animation-delay: 0s; }
+    .orb-2 { width: 400px; height: 400px; background: #6e3d1a; bottom: -80px; right: -100px; animation-delay: 3s; }
+    .orb-3 { width: 300px; height: 300px; background: #1a6e5a; top: 40%; left: 45%; animation-delay: 5s; }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      50%       { transform: translate(20px,-30px) scale(1.08); }
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.03;
+      background-image: repeating-linear-gradient(0deg, #fff 0 1px, transparent 1px 60px),
+                        repeating-linear-gradient(90deg, #fff 0 1px, transparent 1px 60px);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(212,168,83,0.12);
+      border: 1px solid rgba(212,168,83,0.3);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      animation: fadeSlideDown 0.8s ease forwards;
+    }
+    .hero-badge::before { content:'✦'; font-size: 10px; }
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(42px, 7vw, 88px);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      animation: fadeSlideUp 0.9s 0.1s ease both;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold);
+      display: block;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 300;
+      color: var(--text-soft);
+      max-width: 520px;
+      margin-bottom: 40px;
+      animation: fadeSlideUp 0.9s 0.2s ease both;
+    }
+    .hero-cta-group {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      animation: fadeSlideUp 0.9s 0.35s ease both;
+    }
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 64px;
+      animation: fadeSlideUp 0.9s 0.5s ease both;
+    }
+    .stat-item { }
+    .stat-num {
+      font-family: 'Cinzel', serif;
+      font-size: 32px; font-weight: 700;
+      color: var(--gold);
+    }
+    .stat-label { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
+    .hero-scroll {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      z-index: 2;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    .scroll-text { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); }
+    @keyframes bounce { 0%,100%{transform: translateX(-50%) translateY(0);} 50%{transform: translateX(-50%) translateY(6px);} }
+    @keyframes fadeSlideDown { from{opacity:0;transform:translateY(-16px);} to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeSlideUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
+
+    /* ============================================================
+       FEATURE 1: SMART TRIP PLANNER
+    ============================================================ */
+    /* SECTION: Trip Planner */
+    #planner { background: linear-gradient(180deg, var(--bg-primary) 0%, #080c18 100%); }
+    .planner-card {
+      background: rgba(212,168,83,0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .planner-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .planner-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .planner-field label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .planner-field select,
+    .planner-field input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 14px;
+      transition: border-color 0.25s;
+      -webkit-appearance: none;
+    }
+    .planner-field select:focus,
+    .planner-field input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .planner-field select option { background: #1a1a2e; }
+    .planner-type-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .type-btn {
+      flex: 1; min-width: 80px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 12px 8px;
+      color: var(--text-soft);
+      font-size: 13px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .type-btn.active, .type-btn:hover {
+      background: rgba(212,168,83,0.15);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .planner-actions { display: flex; gap: 16px; justify-content: center; margin-top: 8px; }
+    /* Itinerary Result */
+    #itinerary-result {
+      display: none;
+      margin-top: 40px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      animation: fadeSlideUp 0.5s ease;
+    }
+    .itinerary-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
+    }
+    .itinerary-days { display: flex; flex-direction: column; gap: 20px; }
+    .day-card {
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      border-left: 3px solid var(--gold);
+    }
+    .day-label {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .day-activities { display: flex; flex-direction: column; gap: 8px; }
+    .activity {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 14px; color: var(--text-soft);
+    }
+    .activity-time {
+      min-width: 70px;
+      font-size: 12px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ============================================================
+       TRENDING DESTINATIONS
+    ============================================================ */
+    /* SECTION: Trending Destinations */
+    #destinations {
+      background: #080c18;
+    }
+    .dest-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .dest-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      height: 360px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .dest-card:hover { transform: scale(1.02); }
+    .dest-card:hover .dest-img { transform: scale(1.08); }
+    .dest-card:hover .dest-overlay { opacity: 0.7; }
+    .dest-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .dest-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(6,6,15,0.95) 0%, rgba(6,6,15,0.2) 60%);
+      opacity: 0.85;
+      transition: opacity 0.4s;
+    }
+    .dest-content {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 24px;
+    }
+    .dest-state { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .dest-name { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .dest-meta { display: flex; align-items: center; justify-content: space-between; }
+    .dest-rating { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-soft); }
+    .dest-tag { font-size: 11px; background: rgba(212,168,83,0.2); color: var(--gold); padding: 4px 12px; border-radius: 100px; }
+    /* Placeholder gradient for destination images */
+    .dest-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 64px;
+    }
+    .grad-jaipur { background: linear-gradient(135deg, #c0392b, #8e44ad, #f39c12); }
+    .grad-udaipur { background: linear-gradient(135deg, #1a6b8a, #16a085, #f39c12); }
+    .grad-goa { background: linear-gradient(135deg, #0099f1, #1a3a4a, #27ae60); }
+    .grad-delhi { background: linear-gradient(135deg, #2c3e50, #e74c3c, #c0392b); }
+    .grad-shimla { background: linear-gradient(135deg, #2980b9, #6dd5fa, #ffffff30); }
+    .grad-varanasi { background: linear-gradient(135deg, #f39c12, #d35400, #7d3c98); }
+
+    /* States Slider */
+    #states { background: var(--bg-primary); overflow: hidden; }
+    .states-track-wrap { overflow: hidden; width: 100%; position: relative; }
+    .states-track-wrap::before,
+    .states-track-wrap::after {
+      content: '';
+      position: absolute; top: 0; bottom: 0; width: 80px;
+      z-index: 2;
+    }
+    .states-track-wrap::before { left: 0; background: linear-gradient(90deg, var(--bg-primary), transparent); }
+    .states-track-wrap::after { right: 0; background: linear-gradient(-90deg, var(--bg-primary), transparent); }
+    .states-track {
+      display: flex; gap: 16px;
+      animation: slideLeft 30s linear infinite;
+      width: max-content;
+    }
+    .states-track:hover { animation-play-state: paused; }
+    @keyframes slideLeft { from{transform: translateX(0);} to{transform: translateX(-50%);} }
+    .state-chip {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-soft);
+      border-radius: 100px;
+      padding: 12px 24px;
+      white-space: nowrap;
+      font-size: 14px;
+      font-weight: 500;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .state-chip:hover { border-color: var(--gold); background: rgba(212,168,83,0.1); color: var(--gold); }
+    .state-chip .flag { font-size: 22px; }
+
+    /* ============================================================
+       FEATURE 6: READY-MADE ITINERARY CARDS
+    ============================================================ */
+    /* SECTION: Itinerary Cards */
+    #itinerary-cards { background: #080c18; }
+    .itin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .itin-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+    }
+    .itin-banner {
+      height: 180px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 56px;
+      position: relative;
+    }
+    .itin-body {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-soft);
+      border-top: none;
+      padding: 24px;
+    }
+    .itin-duration {
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 8px;
+    }
+    .itin-title { font-family: 'Cinzel', serif; font-size: 18px; margin-bottom: 12px; }
+    .itin-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .itin-tag {
+      font-size: 11px; padding: 4px 10px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 100px;
+      color: var(--text-soft);
+    }
+    .itin-footer { display: flex; align-items: center; justify-content: space-between; }
+    .itin-price { font-family: 'Cinzel', serif; font-size: 18px; color: var(--gold); }
+    .itin-price small { font-size: 11px; color: var(--text-muted); font-family: 'Raleway', sans-serif; display: block; }
+
+    /* ============================================================
+       FEATURE 2: HOTEL / STAY RECOMMENDATIONS
+    ============================================================ */
+    /* SECTION: Hotels */
+    #hotels { background: var(--bg-primary); }
+    .hotels-filter {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 40px; justify-content: center;
+    }
+    .filter-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-soft);
+      color: var(--text-soft);
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      transition: var(--transition);
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: rgba(212,168,83,0.15);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .hotels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .hotel-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      background: rgba(255,255,255,0.03);
+      transition: var(--transition);
+    }
+    .hotel-card:hover {
+      border-color: var(--border);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-gold);
+    }
+    .hotel-img {
+      height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 52px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hotel-tier {
+      position: absolute; top: 12px; left: 12px;
+    }
+    .hotel-body { padding: 20px; }
+    .hotel-name { font-family: 'Cinzel', serif; font-size: 17px; margin-bottom: 6px; }
+    .hotel-location { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+    .hotel-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 13px; }
+    .hotel-rating .count { color: var(--text-muted); font-size: 12px; }
+    .hotel-amenities { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .amenity { font-size: 11px; color: var(--text-soft); background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 100px; }
+    .hotel-footer { display: flex; align-items: center; justify-content: space-between; }
+    .hotel-price .per-night { font-size: 11px; color: var(--text-muted); }
+    .hotel-price .amount { font-family: 'Cinzel', serif; font-size: 22px; color: var(--gold); }
+
+    /* ============================================================
+       FEATURE 3: FOOD GUIDE
+    ============================================================ */
+    /* SECTION: Food Guide */
+    #food { background: #080c18; }
+    .food-tabs {
+      display: flex; gap: 0; margin-bottom: 40px;
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--radius-sm);
+      padding: 4px;
+      border: 1px solid var(--border-soft);
+      max-width: 600px; margin-left: auto; margin-right: auto; margin-bottom: 40px;
+    }
+    .food-tab {
+      flex: 1; text-align: center;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+    .food-tab.active {
+      background: rgba(212,168,83,0.2);
+      color: var(--gold);
+    }
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .food-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .food-card:hover { transform: translateY(-4px); border-color: var(--border); }
+    .food-img {
+      height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px;
+    }
+    .food-body { padding: 20px; }
+    .food-category { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .food-name { font-family: 'Cinzel', serif; font-size: 16px; margin-bottom: 8px; }
+    .food-desc { font-size: 13px; color: var(--text-soft); margin-bottom: 12px; }
+    .food-meta { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+    .food-price { color: var(--gold); font-weight: 600; }
+    .food-rating { display: flex; align-items: center; gap: 4px; color: var(--text-muted); }
+
+    /* ============================================================
+       FEATURE 4: TRANSPORT GUIDE
+    ============================================================ */
+    /* SECTION: Transport Guide */
+    #transport { background: var(--bg-primary); }
+    .transport-city-tabs {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 36px; justify-content: center;
+    }
+    .transport-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .transport-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      transition: var(--transition);
+    }
+    .transport-card:hover { border-color: var(--border); }
+    .transport-icon { font-size: 32px; margin-bottom: 12px; }
+    .transport-type { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .transport-title { font-family: 'Cinzel', serif; font-size: 16px; margin-bottom: 10px; }
+    .transport-details { font-size: 13px; color: var(--text-soft); line-height: 1.8; }
+    .transport-cost {
+      margin-top: 12px; padding-top: 12px;
+      border-top: 1px solid var(--border-soft);
+      font-size: 13px;
+      display: flex; justify-content: space-between;
+      align-items: center;
+    }
+    .cost-label { color: var(--text-muted); }
+    .cost-value { color: var(--gold); font-weight: 600; }
+
+    /* ============================================================
+       FEATURE 5: HIDDEN GEMS
+    ============================================================ */
+    /* SECTION: Hidden Gems */
+    #hidden-gems { background: #080c18; }
+    .gems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .gem-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .gem-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: var(--shadow-gold); }
+    .gem-visual {
+      height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 56px;
+      position: relative;
+    }
+    .gem-secret-badge {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(212,168,83,0.9);
+      color: #0a0a0a;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .gem-body { padding: 20px; }
+    .gem-type { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--teal-light); margin-bottom: 6px; }
+    .gem-name { font-family: 'Cinzel', serif; font-size: 17px; margin-bottom: 8px; }
+    .gem-desc { font-size: 13px; color: var(--text-soft); margin-bottom: 14px; }
+    .gem-footer { display: flex; align-items: center; justify-content: space-between; font-size: 13px; }
+    .gem-city { color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
+
+    /* ============================================================
+       FEATURE 7: SEASONAL TRAVEL
+    ============================================================ */
+    /* SECTION: Seasonal Travel */
+    #seasonal { background: var(--bg-primary); }
+    .seasons-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    @media(max-width:640px) { .seasons-grid { grid-template-columns: 1fr; } }
+    .season-card {
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      min-height: 220px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .season-card:hover { transform: scale(1.02); }
+    .season-card::before { content: ''; position: absolute; inset: 0; border-radius: inherit; }
+    .season-summer { background: linear-gradient(135deg, #7b2d00, #d4680a, #f0a500); }
+    .season-winter { background: linear-gradient(135deg, #0a2540, #1a4a8a, #5babf5); }
+    .season-monsoon { background: linear-gradient(135deg, #0a3320, #0d6e3e, #27ae60); }
+    .season-festival { background: linear-gradient(135deg, #4a0a6e, #8b1a9a, #d4680a); }
+    .season-icon { font-size: 48px; margin-bottom: 16px; }
+    .season-name { font-family: 'Cinzel', serif; font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+    .season-months { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; opacity: 0.8; }
+    .season-places { display: flex; gap: 8px; flex-wrap: wrap; }
+    .season-place {
+      font-size: 12px; background: rgba(255,255,255,0.15);
+      padding: 4px 12px; border-radius: 100px;
+    }
+    .season-large {
+      grid-column: 1 / -1;
+    }
+
+    /* ============================================================
+       FEATURE 8: USER REVIEWS
+    ============================================================ */
+    /* SECTION: Reviews */
+    #reviews { background: #080c18; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .review-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      transition: var(--transition);
+      position: relative;
+    }
+    .review-card:hover { border-color: var(--border); transform: translateY(-3px); }
+    .review-quote {
+      position: absolute; top: 20px; right: 24px;
+      font-size: 48px; color: rgba(212,168,83,0.15);
+      font-family: Georgia, serif; line-height: 1;
+    }
+    .review-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .review-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; color: #0a0a0a;
+      flex-shrink: 0;
+    }
+    .review-name { font-weight: 600; font-size: 15px; }
+    .review-place { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .review-stars { margin-bottom: 12px; }
+    .review-text { font-size: 14px; color: var(--text-soft); line-height: 1.7; font-style: italic; }
+    .review-date { font-size: 11px; color: var(--text-muted); margin-top: 16px; }
+
+    /* ============================================================
+       FEATURE 9: REELS / SHORT VIDEOS
+    ============================================================ */
+    /* SECTION: Reels */
+    #reels { background: var(--bg-primary); }
+    .reels-scroll {
+      display: flex; gap: 16px;
+      overflow-x: auto; padding-bottom: 12px;
+      scrollbar-width: none;
+    }
+    .reels-scroll::-webkit-scrollbar { display: none; }
+    .reel-card {
+      flex-shrink: 0;
+      width: 180px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .reel-card:hover { transform: scale(1.04); }
+    .reel-visual {
+      height: 320px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px;
+      position: relative;
+    }
+    .reel-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+    }
+    .reel-play {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      border: 2px solid rgba(255,255,255,0.4);
+      transition: var(--transition);
+    }
+    .reel-card:hover .reel-play { background: var(--gold); }
+    .reel-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 16px 12px;
+    }
+    .reel-duration {
+      position: absolute; top: 10px; right: 10px;
+      background: rgba(0,0,0,0.6);
+      font-size: 11px; padding: 3px 8px; border-radius: 100px;
+      color: var(--text-soft);
+    }
+    .reel-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .reel-city { font-size: 11px; color: var(--gold); }
+    .reel-views { font-size: 11px; color: var(--text-muted); }
+
+    /* ============================================================
+       FEATURE 10: DEALS & OFFERS
+    ============================================================ */
+    /* SECTION: Deals */
+    #deals { background: #080c18; }
+    .deals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .deal-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+    }
+    .deal-card:hover { transform: translateY(-4px); border-color: var(--border); box-shadow: var(--shadow-gold); }
+    .deal-banner {
+      height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 52px;
+      position: relative;
+    }
+    .deal-discount {
+      position: absolute; top: 12px; right: 12px;
+      background: #e74c3c;
+      color: #fff;
+      font-size: 14px; font-weight: 800;
+      padding: 6px 14px; border-radius: 8px;
+    }
+    .deal-timer {
+      position: absolute; bottom: 10px; left: 12px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      font-size: 11px; padding: 5px 12px; border-radius: 100px;
+      color: var(--gold); font-weight: 600;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .deal-body { padding: 20px; }
+    .deal-type { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .deal-name { font-family: 'Cinzel', serif; font-size: 16px; margin-bottom: 8px; }
+    .deal-desc { font-size: 13px; color: var(--text-soft); margin-bottom: 14px; }
+    .deal-pricing { display: flex; align-items: flex-end; gap: 10px; margin-bottom: 16px; }
+    .deal-original { font-size: 14px; color: var(--text-muted); text-decoration: line-through; }
+    .deal-final { font-family: 'Cinzel', serif; font-size: 24px; color: var(--gold); }
+    .deal-includes { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .deal-include { font-size: 11px; color: var(--text-soft); display: flex; align-items: center; gap: 4px; }
+    .deal-include::before { content: '✓'; color: var(--teal-light); }
+
+    /* ============================================================
+       NEWSLETTER
+    ============================================================ */
+    /* SECTION: Newsletter */
+    #newsletter { background: var(--bg-primary); }
+    .newsletter-card {
+      background: linear-gradient(135deg, rgba(212,168,83,0.08) 0%, rgba(26,159,168,0.08) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 64px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .newsletter-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,168,83,0.1) 0%, transparent 60%);
+    }
+    .newsletter-icon { font-size: 48px; margin-bottom: 20px; }
+    .newsletter-form {
+      display: flex; gap: 12px; justify-content: center;
+      flex-wrap: wrap; margin-top: 32px;
+      position: relative;
+    }
+    .newsletter-input {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border-soft);
+      border-radius: 100px;
+      padding: 16px 28px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 15px;
+      width: 360px; max-width: 100%;
+      transition: border-color 0.25s;
+    }
+    .newsletter-input::placeholder { color: var(--text-muted); }
+    .newsletter-input:focus { outline: none; border-color: var(--gold); }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    /* SECTION: Footer */
+    footer {
+      background: #040408;
+      border-top: 1px solid var(--border-soft);
+      padding: 64px 0 32px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand .nav-logo { font-size: 26px; margin-bottom: 16px; }
+    .footer-desc { font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px; max-width: 300px; }
+    .footer-socials { display: flex; gap: 12px; }
+    .social-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      transition: var(--transition);
+    }
+    .social-btn:hover { background: rgba(212,168,83,0.15); border-color: var(--gold); }
+    .footer-col h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 14px; letter-spacing: 1px;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: var(--text-muted); transition: color 0.25s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid var(--border-soft);
+      padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 13px; color: var(--text-muted); }
+    .footer-badges { display: flex; gap: 12px; }
+    .footer-badge {
+      font-size: 11px; letter-spacing: 1px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-soft);
+      padding: 4px 12px; border-radius: 100px;
+      color: var(--text-muted);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media(max-width: 1024px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media(max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .hero-stats { gap: 24px; flex-wrap: wrap; }
+      .planner-card { padding: 28px 20px; }
+      .planner-grid { grid-template-columns: 1fr; }
+      .seasons-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: auto; }
+      section { padding: 64px 0; }
+    }
+    @media(max-width: 480px) {
+      .hero-cta-group { flex-direction: column; }
+      .newsletter-card { padding: 40px 24px; }
+      .planner-actions { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">SMART<span>TRIP</span></div>
+      <ul class="nav-links">
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#planner">Planner</a></li>
+        <li><a href="#hotels">Hotels</a></li>
+        <li><a href="#food">Food</a></li>
+        <li><a href="#deals">Deals</a></li>
+        <li><a href="#hidden-gems">Hidden Gems</a></li>
+      </ul>
+      <a href="#planner" class="btn-gold nav-cta">Plan Trip ✦</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-menu" id="closeMenu">✕</button>
+    <a href="#destinations" onclick="closeMobileMenu()">Destinations</a>
+    <a href="#planner" onclick="closeMobileMenu()">Planner</a>
+    <a href="#hotels" onclick="closeMobileMenu()">Hotels</a>
+    <a href="#food" onclick="closeMobileMenu()">Food</a>
+    <a href="#hidden-gems" onclick="closeMobileMenu()">Hidden Gems</a>
+    <a href="#deals" onclick="closeMobileMenu()">Deals</a>
+  </div>
+
+  <!-- ============================================================
+       HERO SECTION
+  ============================================================ -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">India's Premium Travel Planner</div>
+      <h1 class="hero-title">
+        Discover the<br>
+        <em>Soul of India</em>
+        Differently.
+      </h1>
+      <p class="hero-sub">
+        Curated itineraries, hidden gems, luxury stays and real food guides —
+        crafted for the modern traveller.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#planner" class="btn-gold">Plan My Trip ✦</a>
+        <a href="#destinations" class="btn-outline">Explore Destinations →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Destinations</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">12K+</div>
+          <div class="stat-label">Happy Travellers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">350+</div>
+          <div class="stat-label">Hotels Listed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">98%</div>
+          <div class="stat-label">Satisfaction</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span class="scroll-text">Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURE 1: SMART TRIP PLANNER
+  ============================================================ -->
+  <section id="planner">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">✦ AI-Powered</span>
+        <h2 class="section-title">Smart <span>Trip Planner</span></h2>
+        <div class="gold-line"></div>
+        <p class="section-sub">Tell us your preferences and we'll craft the perfect itinerary for your dream trip.</p>
+      </div>
+      <div class="planner-card reveal">
+        <div class="planner-grid">
+          <!-- State / City -->
+          <div class="planner-field">
+            <label>🗺 Destination</label>
+            <select id="pl-city">
+              <option value="">Select City / State</option>
+              <option value="Jaipur">Jaipur, Rajasthan</option>
+              <option value="Udaipur">Udaipur, Rajasthan</option>
+              <option value="Jodhpur">Jodhpur, Rajasthan</option>
+              <option value="Delhi">New Delhi</option>
+              <option value="Goa">Goa</option>
+              <option value="Shimla">Shimla, Himachal</option>
+              <option value="Varanasi">Varanasi, UP</option>
+              <option value="Mumbai">Mumbai, Maharashtra</option>
+              <option value="Kerala">Kerala (God's Own Country)</option>
+              <option value="Manali">Manali, Himachal</option>
+            </select>
+          </div>
+          <!-- Budget -->
+          <div class="planner-field">
+            <label>💰 Budget (per person)</label>
+            <select id="pl-budget">
+              <option value="">Select Budget</option>
+              <option value="budget">Budget – Under ₹5,000</option>
+              <option value="mid">Mid-Range – ₹5K–₹15K</option>
+              <option value="luxury">Luxury – ₹15K+</option>
+            </select>
+          </div>
+          <!-- Days -->
+          <div class="planner-field">
+            <label>📅 Number of Days</label>
+            <select id="pl-days">
+              <option value="">Select Duration</option>
+              <option value="1">1 Day (Quick Getaway)</option>
+              <option value="2">2 Days (Weekend)</option>
+              <option value="3">3 Days</option>
+              <option value="5">5 Days</option>
+              <option value="7">7 Days (Full Week)</option>
+              <option value="10">10 Days (Explorer)</option>
+            </select>
+          </div>
+          <!-- Group Type -->
+          <div class="planner-field">
+            <label>👥 Travel Type</label>
+            <div class="planner-type-group" id="travelType">
+              <button class="type-btn active" data-type="Solo">🧳 Solo</button>
+              <button class="type-btn" data-type="Couple">💑 Couple</button>
+              <button class="type-btn" data-type="Family">👨‍👩‍👧 Family</button>
+              <button class="type-btn" data-type="Friends">🎉 Friends</button>
+            </div>
+          </div>
+        </div>
+        <div class="planner-actions">
+          <button class="btn-gold" onclick="generateItinerary()">Generate Itinerary ✦</button>
+          <button class="btn-outline" onclick="clearPlanner()">Clear</button>
+        </div>
+        <!-- Itinerary Result -->
+        <div id="itinerary-result">
+          <div class="itinerary-header">
+            <div>
+              <div class="section-label" id="itin-badge">Your Trip</div>
+              <h3 class="section-title" style="font-size:26px;" id="itin-title">Sample Itinerary</h3>
+            </div>
+            <div style="text-align:right">
+              <div class="badge" id="itin-budget-badge">Mid-Range</div>
+            </div>
+          </div>
+          <div class="itinerary-days" id="itin-days"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TRENDING DESTINATIONS
+  ============================================================ -->
+  <section id="destinations">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">✦ Most Visited</span>
+        <h2 class="section-title">Trending <span>Destinations</span></h2>
+        <div class="gold-line"></div>
+        <p class="section-sub">Handpicked cities loved by thousands of travellers for their culture, beauty, and food.</p>
+      </div>
+      <div class="dest-grid reveal">
+        <div class="dest-card">
+          <div class="dest-img dest-img-placeholder grad-jaipur">🏰</div>
+          <div class="dest-overlay"></div>
+          <div class="dest-content">
+            <div class="dest-state">Rajasthan</div>
+            <div class="dest-name">Jaipur</div>
+            <div class="dest-meta">
+              <div class="dest-rating">⭐ 4.8 · 3,240 reviews</div>
+              <span class="dest-tag">Pink City</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-card">
+          <div class="dest-img dest-img-placeholder grad-udaipur">🏛</div>
+          <div class="dest-overlay"></div>
+          <div class="dest-content">
+            <div class="dest-state">Rajasthan</div>
+            <div class="dest-name">Udaipur</div>
+            <div class="dest-meta">
+              <div class="dest-rating">⭐ 4.9 · 2,180 reviews</div>
+              <span class="dest-tag">Lake City</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-card">
+          <div class="dest-img dest-img-placeholder grad-goa">🌊</div>
+          <div class="dest-overlay"></div>
+          <div class="dest-content">
+            <div class="dest-state">Goa</div>
+            <div class="dest-name">Goa</div>
+            <div class="dest-meta">
+              <div class="dest-rating">⭐ 4.7 · 5,600 reviews</div>
+              <span class="dest-tag">Beach Paradise</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-card">
+          <div class="dest-img dest-img-placeholder grad-delhi">🕌</div>
+          <div class="dest-overlay"></div>
+          <div class="dest-content">
+            <div class="dest-state">Delhi</div>
+            <div class="dest-name">New Delhi</div>
+            <div class="dest-meta">
+              <div class="dest-rating">⭐ 4.6 · 4,100 reviews</div>
+              <span class="dest-tag">Capital</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-card">
+          <div class="dest-img dest-img-placeholder grad-shimla">⛰</div>
+          <div class="dest-overlay"></div>
+          <div class="dest-content">
+            <div class="dest-state">Himachal Pradesh</div>
+            <div class="dest-name">Shimla</div>
+            <div class="dest-meta">
+              <div class="dest-rating">⭐ 4.7 · 1,890 reviews</div>
+              <span class="dest-tag">Hill Station</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-card">
+          <div class="dest-img dest-img-placeholder grad-varanasi">🪔</div>
+          <div class="dest-overlay"></div>
+          <div class="dest-content">
+            <div class="dest-state">Uttar Pradesh</div>
+            <div class="dest-name">Varanasi</div>
+            <div class="dest-meta">
+              <div class="dest-rating">⭐ 4.8 · 3,020 reviews</div>
+              <span class="dest-tag">Spiritual</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- States Slider -->
+  <section id="states" style="padding: 40px 0;">
+    <div class="container" style="margin-bottom:24px;">
+      <p class="section-label" style="margin:0">✦ All States</p>
+    </div>
+    <div class="states-track-wrap">
+      <div class="states-track" id="statesTrack">
+        <!-- duplicated for infinite scroll -->
+        <div class="state-chip"><span class="flag">🏰</span>Rajasthan</div>
+        <div class="state-chip"><span class="flag">🌊</span>Goa</div>
+        <div class="state-chip"><span class="flag">🏔</span>Himachal Pradesh</div>
+        <div class="state-chip"><span class="flag">🌿</span>Kerala</div>
+        <div class="state-chip"><span class="flag">🕌</span>Delhi</div>
+        <div class="state-chip"><span class="flag">🏛</span>Uttar Pradesh</div>
+        <div class="state-chip"><span class="flag">🌄</span>Uttarakhand</div>
+        <div class="state-chip"><span class="flag">🎭</span>Maharashtra</div>
+        <div class="state-chip"><span class="flag">🐅</span>Madhya Pradesh</div>
+        <div class="state-chip"><span class="flag">⛩</span>Tamil Nadu</div>
+        <div class="state-chip"><span class="flag">🌺</span>Karnataka</div>
+        <div class="state-chip"><span class="flag">🎨</span>Gujarat</div>
+        <div class="state-chip"><span class="flag">❄</span>Jammu & Kashmir</div>
+        <div class="state-chip"><span class="flag">🍵</span>Assam</div>
+        <div class="state-chip"><span class="flag">🔥</span>Andhra Pradesh</div>
+        <!-- Duplicate for seamless loop -->
+        <div class="state-chip"><span class="flag">🏰</span>Rajasthan</div>
+        <div class="state-chip"><span class="flag">🌊</span>Goa</div>
+        <div class="state-chip"><span class="flag">🏔</span>Himachal Pradesh</div>
+        <div class="state-chip"><span class="flag">🌿</span>Kerala</div>
+        <div class="state-chip"><span class="flag">🕌</span>Delhi</div>
+        <div class="state-chip"><span class="flag">🏛</span>Uttar Pradesh</div>
+        <div class="state-chip"><span class="flag">🌄</span>Uttarakhand</div>
+        <div class="state-chip"><span class="flag">🎭</span>Maharashtra</div>
+        <div class="state-chip"><span class="flag">🐅</span>Madhya Pradesh</div>
+        <div class="state-chip"><span class="flag">⛩</span>Tamil Nadu</div>
+        <div class="state-chip"><span class="flag">🌺</span>Karnataka</div>
+        <div class="state-chip"><span class="flag">🎨</span>Gujarat</div>
+        <div class="state-chip"><span class="flag">❄</span>Jammu & Kashmir</div>
+        <div class="state-chip"><span class="flag">🍵</span>Assam</div>
+        <div class="state-chip"><span class="flag">🔥</span>Andhra Pradesh</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURE 6: READY-MADE ITINERARY CARDS
+  ============================================================ -->
+  <section id="itinerary-cards">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">✦ Pre-Built</span>
+        <h2 class="section-title">Ready-Made <span>Itineraries</span></h2>
+        <div class="gold-line"></div>
+        <p class="section-sub">Download and go. Our expert-crafted travel plans save you hours of research.</p>
+      </div>
+      <div class="itin-grid reveal">
+        <div class="itin-card glass-card">
+          <div class="itin-banner" style="background:linear-gradient(135deg,#8e2de2,#f953c6);">🏰</div>
+          <div class="itin-body">
+            <div class="itin-duration">2 Days</div>
+            <div class="itin-title">Jaipur Weekend Escape</div>
+            <div class="itin-tags">
+              <span class="itin-tag">Heritage</span>
+              <span class="itin-tag">Forts</span>
+              <span class="itin-tag">Street Food</span>
+            </div>
+            <div class="itin-footer">
+              <div class="itin-price">₹4,500<small>per person</small></div>
+              <button class="btn-gold" style="padding:9px 18px;font-size:11px;" onclick="loadPrebuiltItinerary('jaipur2')">View →</button>
+            </div>
+          </div>
+        </div>
+        <div class="itin-card glass-card">
+          <div class="itin-banner" style="background:linear-gradient(135deg,#1a3a5c,#e74c3c);">🕌</div>
+          <div class="itin-body">
+            <div class="itin-duration">3 Days</div>
+            <div class="itin-title">Delhi Heritage Trail</div>
+            <div class="itin-tags">
+              <span class="itin-tag">History</span>
+              <span class="itin-tag">Monuments</span>
+              <span class="itin-tag">Mughal</span>
+            </div>
+            <div class="itin-footer">
+              <div class="itin-price">₹6,200<small>per person</small></div>
+              <button class="btn-gold" style="padding:9px 18px;font-size:11px;" onclick="loadPrebuiltItinerary('delhi3')">View →</button>
+            </div>
+          </div>
+        </div>
+        <div class="itin-card glass-card">
+          <div class="itin-banner" style="background:linear-gradient(135deg,#f7971e,#ffd200,#d35400);">🏜</div>
+          <div class="itin-body">
+            <div class="itin-duration">5 Days</div>
+            <div class="itin-title">Golden Rajasthan Tour</div>
+            <div class="itin-tags">
+              <span class="itin-tag">Jaipur</span>
+              <span class="itin-tag">Jodhpur</span>
+              <span class="itin-tag">Udaipur</span>
+            </div>
+            <div class="itin-footer">
+              <div class="itin-price">₹12,800<small>per person</small></div>
+              <button class="btn-gold" style="padding:9px 18px;font-size:11px;" onclick="loadPrebuiltItinerary('raj5')">View →</button>
+            </div>
+          </div>
+        </div>
+        <div class="itin-card glass-card">
+          <div class="itin-banner" style="background:linear-gradient(135deg,#0099f7,#f11712,#27ae60);">🌊</div>
+          <div class="itin-body">
+            <div class="itin-duration">4 Days</div>
+            <div class="itin-title">Goa Friends Getaway</div>
+            <div class="itin-tags">
+              <span class="itin-tag">Beaches</span>
+              <span class="itin-tag">Nightlife</span>
+              <span class="itin-tag">Seafood</span>
+            </div>
+            <div class="itin-footer">
+              <div class="itin-price">₹9,500<small>per person</small></div>
+              <button class="btn-gold" style="padding:9px 18px;font-size:11px;" onclick="loadPrebuiltItinerary('goa4')">View →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURE 2: HOTEL / STAY RECOMMENDATIONS
+  ============================================================ -->
+  <section id="hotels">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">✦ Verified Stays</span>
+        <h2 class="section-title">Hotel <span>Recommendations</span></h2>
+        <div class="gold-line"></div>
+        <p class="section-sub">From cozy guesthouses to palace hotels — handpicked for every budget.</p>
+      </div>
+      <div class="hotels-filter reveal">
+        <button class="filter-btn active" onclick="filterHotels('all', this)">All</button>
+        <button class="filter-btn" onclick="filterHotels('budget', this)">🏠 Budget</button>
+        <button class="filter-btn" onclick="filterHotels('mid', this)">🏨 Mid-Range</button>
+        <button class="filter-btn" onclick="filterHotels('luxury', this)">👑 Luxury</button>
+      </div>
+      <div class="hotels-grid reveal" id="hotelsGrid">
+        <!-- Budget -->
+        <div class="hotel-card" data-tier="budget">
+          <div class="hotel-img" style="background:linear-gradient(135deg,#1a2a3a,#2a4060);">🏠
+            <span class="hotel-tier"><span class="badge">Budget</span></span>
+          </div>
+          <div class="hotel-body">
+            <div class="hotel-name">The Backpacker's Inn</div>
+            <div class="hotel-location">📍 Old City, Jaipur</div>
+            <div class="hotel-rating">
+              <span class="stars">★★★★</span>
+              <span>4.1</span>
+              <span class="count">(328 reviews)</span>
+            </div>
+            <div class="hotel-amenities">
+              <span class="amenity">Free WiFi</span>
+              <span class="amenity">Dorm + Private</span>
+              <span class="amenity">Rooftop</span>
+            </div>
+            <div class="hotel-footer">
+              <div class="hotel-price">
+                <div class="per-night">per night</div>
+                <div class="amount">₹800</div>
+              </div>
+              <button class="btn-gold" style="padding:9px 18px;font-size:11px;">Book Now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card" data-tier="budget">
+          <div class="hotel-img" style="background:linear-gradient(135deg,#1a3a2a,#2a6040);">🛖
+            <span class="hotel-tier"><span class="badge">Budget</span></span>
+          </div>
+          <div class="hotel-body">
+            <div class="hotel-name">Green View Hostel</div>
+            <div class="hotel-location">📍 Calangute, Goa</div>
+            <div class="hotel-rating">
+              <span class="stars">★★★★</span>
+              <span>4.3</span>
+              <span class="count">(215 reviews)</span>
+            </div>
+            <div class="hotel-amenities">
+              <span class="amenity">Beach Nearby</span>
+              <span class="amenity">AC Rooms</span>
+              <span class="amenity">Breakfast</span>
+            </div>
+            <div class="hotel-footer">
+              <div class="hotel-price">
+                <div class="per-night">per night</div>
+                <div class="amount">₹1,200</div>
+              </div>
+              <button class="btn-gold" style="padding:9px 18px;font-size:11px;">Book Now</button>
+            </div>
+          </div>
+        </div>
+        <!-- Mid -->
+        <div class="hotel-card" data-tier="mid">
+          <div class="hotel-img" style="background:linear-gradient(135deg,#2a1a4a,#4a2a7a);">🏨
+            <span class="hotel-tier"><span class="badge" style="background:rgba(26,159,168,0.2);color:#26c6d0;border-color:rgba(26,159,168,0.4);">Mid-Range</span></span>
+          </div>
+          <div class="hotel-body">
+            <div class="hotel-name">The Royal Haveli</div>
+            <div class="hotel-location">📍 Civil Lines, Jaipur</div>
+            <div class="hotel-rating">
+              <span class="stars">★★★★★</span>
+              <span>4.6</span>
+              <span class="count">(890 reviews)</span>
+            </div>
+            <div class="hotel-amenities">
+              <span class="amenity">Pool</span>
+              <span class="amenity">Spa</span>
+              <span class="amenity">Restaurant</span>
+              <span class="amenity">Parking</span>
+            </div>
+            <div class="hotel-footer">
+              <div class="hotel-price">
+                <div class="per-night">per night</div>
+                <div class="amount">₹4,500</div>
+              </div>
+              <button class="btn-gold" style="padding:9px 18px;font-size:11px;">Book Now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card" data-tier="mid">
+          <div class="hotel-img" style="background:linear-gradient(135deg,#1a3a5c,#2a6090);">🏩
+            <span class="hotel-tier"><span class="badge" style="background:rgba(26,159,168,0.2);color:#26c6d0;border-color:rgba(26,159,168,0.4);">Mid-Range</span></span>
+          </div>
+          <div class="hotel-body">
+            <div class="hotel-name">Seaside Boutique Resort</div>
+            <div class="hotel-location">📍 Baga Beach, Goa</div>
+            <div class="hotel-rating">
+              <span class="stars">★★★★★</span>
+              <span>4.5</span>
+              <span class="count">(1,240 reviews)</span>
+            </div>
+            <div class="hotel-amenities">
+              <span class="amenity">Beachfront</span>
+              <span class="amenity">Pool Bar</span>
+              <span class="amenity">Watersports</span>
+            </div>
+            <div class="hotel-footer">
+              <div class="hotel-price">
+                <div class="per-night">per night</div>
+                <div class="amount">₹6,800</div>
+              </div>
+              <button class="btn-gold" style="padding:9px 18px;font-size:11px;">Book Now</button>
+            </div>
+          </div>
+        </div>
+        <!-- Luxury -->
+        <div class="hotel-card" data-tier="luxury">
+          <div class="hotel-img" style="background:linear-gradient(135deg,#3d1a00,#8b4a00,#d4a853);">👑
+            <span class="hotel-tier"><span class="badge" style="background:rgba(212,168,83,0.25);color:#f0c878;">Luxury</span></span>
+          </div>
+          <div class="hotel-body">
+            <div class="hotel-name">Jai Mahal Palace</div>
+            <div class="hotel-location">📍 Jacob Road, Jaipur</div>
+            <div class="hotel-rating">
+              <span class="stars">★★★★★</span>
+              <span>4.9</span>
+              <span class="count">(2,340 reviews)</span>
+            </div>
+            <div class="hotel-amenities">
+              <span class="amenity">Heritage Palace</span>
+              <span class="amenity">Butler</span>
+              <span class="amenity">Fine Dining</span>
+              <span class="amenity">Spa</span>
+            </div>
+            <div class="hotel-footer">
+              <div class="hotel-price">
+                <div class="per-night">per night</div>
+                <div class="amount">₹22,000</div>
+              </div>
+              <button class="btn-gold" style="padding:9px 18px;font-size:11px;">Book Now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card" data-tier="luxury">
+          <div class="hotel-img" style="background:linear-gradient(135deg,#1a2d5c,#7b1a8a,#d4a853);">🏯
+            <span class="hotel-tier"><span class="badge" style="background:rgba(212,168,83,0.25);color:#f0c878;">Luxury</span></span>
+          </div>
+          <div class="hotel-body">
+            <div class="hotel-name">Leela Palace Udaipur</div>
+            <div class="hotel-location">📍 Lake Pichola, Udaipur</div>
+            <div class="hotel-rating">
+              <span class="stars">★★★★★</span>
+              <span>4.9</span>
+              <span class="count">(3,120 reviews)</span>
+            </div>
+            <div class="hotel-amenities">
+              <span class="amenity">Lake View</span>
+              <span class="amenity">Infinity Pool</span>
+              <span class="amenity">Helicopter Pad</span>
+            </div>
+            <div class="hotel-footer">
+              <div class="hotel-price">
+                <div class="per-night">per night</div>
+                <div class="amount">₹45,000</div>
+              </div>
+              <button class="btn-gold" style="padding:9px 18px;font-size:11px;">Book Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURE 3: FOOD GUIDE
+  ============================================================ -->
+  <section id="food">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">✦ Eat Like a Local</span>
+        <h2 class="section-title">Food <span>Guide</span></h2>
+        <div class="gold-line"></div>
+        <p class="section-sub">From street-side dhabas to rooftop fine dining — taste the real India.</p>
+      </div>
+      <div class="food-tabs reveal">
+        <button class="food-tab active" onclick="filterFood('street', this)">🥘 Street Food</button>
+        <button class="food-tab" onclick="filterFood('cafe', this)">☕ Cafes</button>
+        <button class="food-tab" onclick="filterFood('family', this)">🍽 Restaurants</button>
+        <button class="food-tab" onclick="filterFood('rooftop', this)">🌆 Rooftop</button>
+      </div>
+      <div class="food-grid reveal" id="foodGrid">
+        <!-- Street Food -->
+        <div class="food-card" data-food="street">
+          <div class="food-img" style="background:linear-gradient(135deg,#c0392b,#e67e22);">🍜</div>
+          <div class="food-body">
+            <div class="food-category">Street Food</div>
+            <div class="food-name">Dal Baati Churma</div>
+            <div class="food-desc">Rajasthan's soul food – baked wheat balls in ghee with lentils and sweet churma.</div>
+            <div class="food-meta">
+              <span class="food-price">₹80–₹150</span>
+              <span class="food-rating">⭐ 4.9</span>
+            </div>
+          </div>
+        </div>
+        <div class="food-card" data-food="street">
+          <div class="food-img" style="background:linear-gradient(135deg,#27ae60,#f39c12);">🌮</div>
+          <div class="food-body">
+            <div class="food-category">Street Food</div>
+            <div class="food-name">Pyaaz Kachori</div>
+            <div class="food-desc">Crispy deep-fried pastry stuffed with spiced onion filling — Jaipur's iconic snack.</div>
+            <div class="food-meta">
+              <span class="food-price">₹20–₹30</span>
+              <span class="food-rating">⭐ 4.8</span>
+            </div>
+          </div>
+        </div>
+        <div class="food-card" data-food="street">
+          <div class="food-img" style="background:linear-gradient(135deg,#e74c3c,#8e44ad);">🍢</div>
+          <div class="food-body">
+            <div class="food-category">Street Food · Goa</div>
+            <div class="food-name">Goan Prawn Balchao</div>
+            <div class="food-desc">Fiery tangy prawn pickle — an explosion of coastal flavours, best with fresh bread.</div>
+            <div class="food-meta">
+              <span class="food-price">₹120–₹200</span>
+              <span class="food-rating">⭐ 4.7</span>
+            </div>
+          </div>
+        </div>
+        <!-- Cafe -->
+        <div class="food-card" data-food="cafe" style="display:none">
+          <div class="food-img" style="background:linear-gradient(135deg,#2c3e50,#4a6fa5);">☕</div>
+          <div class="food-body">
+            <div class="food-category">Cafe · Jaipur</div>
+            <div class="food-name">Tattoo Cafe & Kitchen</div>
+            <div class="food-desc">Quirky cafe with exposed brickwork, artisan coffee and global fusion bites.</div>
+            <div class="food-meta">
+              <span class="food-price">₹200–₹500</span>
+              <span class="food-rating">⭐ 4.6</span>
+            </div>
+          </div>
+        </div>
+        <div class="food-card" data-food="cafe" style="display:none">
+          <div class="food-img" style="background:linear-gradient(135deg,#1a4a2a,#2e8b57);">🌿</div>
+          <div class="food-body">
+            <div class="food-category">Cafe · Manali</div>
+            <div class="food-name">The Lazy Dog Lounge</div>
+            <div class="food-desc">Riverside hippie cafe with wood-fire pizza, mountain views, and live music.</div>
+            <div class="food-meta">
+              <span class="food-price">₹300–₹700</span>
+              <span class="food-rating">⭐ 4.8</span>
+            </div>
+          </div>
+        </div>
+        <div class="food-card" data-food="cafe" style="display:none">
+          <div class="food-img" style="background:linear-gradient(135deg,#5c1a1a,#a0522d);">🧁</div>
+          <div class="food-body">
+            <div class="food-category">Cafe · Delhi</div>
+            <div class="food-name">Hauz Khas Village Cafes</div>
+            <div class="food-desc">Lake-view cafes serving continental breakfast, smoothie bowls and cold brews.</div>
+            <div class="food-meta">
+              <span class="food-price">₹250–₹600</span>
+              <span class="food-rating">⭐ 4.5</span>
+            </div>
+          </div>
+        </div>
+        <!-- Restaurant -->
+        <div class="food-card" data-food="family" style="display:none">
+          <div class="food-img" style="background:linear-gradient(135deg,#1a1a5c,#4a2090);">🍽</div>
+          <div class="food-body">
+            <div class="food-category">Restaurant · Jaipur</div>
+            <div class="food-name">Suvarna Mahal</div>
+            <div class="food-desc">Royal Rajasthani thali with heritage setting inside Rambagh Palace.</div>
+            <div class="food-meta">
+              <span class="food-price">₹1,800–₹3,500</span>
+              <span class="food-rating">⭐ 4.9</span>
+            </div>
+          </div>
+        </div>
+        <div class="food-card" data-food="family" style="display:none">
+          <div class="food-img" style="background:linear-gradient(135deg,#3d1a00,#7a3500);">🥘</div>
+          <div class="food-body">
+            <div class="food-category">Restaurant · Delhi</div>
+            <div class="food-name">Bukhara – ITC Maurya</div>
+            <div class="food-desc">Legendary North-West Frontier cuisine loved by world leaders. Dal Bukhara is iconic.</div>
+            <div class="food-meta">
+              <span class="food-price">₹2,500–₹6,000</span>
+              <span class="food-rating">⭐ 4.9</span>
+            </div>
+          </div>
+        </div>
+        <!-- Rooftop -->
+        <div class="food-card" data-food="rooftop" style="display:none">
+          <div class="food-img" style="background:linear-gradient(135deg,#0d1b3e,#1a4080,#d4a853);">🌆</div>
+          <div class="food-body">
+            <div class="food-category">Rooftop · Jaipur</div>
+            <div class="food-name">Dera Rawatsar Rooftop</div>
+            <div class="food-desc">Stunning fort views, candlelit tables, live folk music, authentic Rajasthani cuisine.</div>
+            <div class="food-meta">
+              <span class="food-price">₹800–₹2,000</span>
+              <span class="food-rating">⭐ 4.7</span>
+            </div>
+          </div>
+        </div>
+        <div class="food-card" data-food="rooftop" style="display:none">
+          <div class="food-img" style="background:linear-gradient(135deg,#0f3443,#34e89e50);">🌅</div>
+          <div class="food-body">
+            <div class="food-category">Rooftop · Udaipur</div>
+            <div class="food-name">Ambrai Restaurant</div>
+            <div class="food-desc">Lake Pichola views with City Palace backdrop. Perfect for romantic candlelight dinners.</div>
+            <div class="food-meta">
+              <span class="food-price">₹600–₹1,800</span>
+              <span class="food-rating">⭐ 4.8</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURE 4: TRANSPORT GUIDE
+  ============================================================ -->
+  <section id="transport">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">✦ Getting Around</span>
+        <h2 class="section-title">Transport <span>Guide</span></h2>
+        <div class="gold-line"></div>
+        <p class="section-sub">Everything you need to know about reaching and navigating your destination.</p>
+      </div>
+      <div class="transport-city-tabs reveal">
+        <button class="filter-btn active" onclick="switchTransport('jaipur', this)">Jaipur</button>
+        <button class="filter-btn" onclick="switchTransport('delhi', this)">Delhi</button>
+        <button class="filter-btn" onclick="switchTransport('goa', this)">Goa</button>
+      </div>
+      <div class="transport-content reveal" id="transportContent">
+        <div class="transport-card">
+          <div class="transport-icon">✈️</div>
+          <div class="transport-type">By Air</div>
+          <div class="transport-title">Jaipur International Airport</div>
+          <div class="transport-details">Located 13km from city centre. Flights from Delhi (1hr), Mumbai (2hrs), Bengaluru (2.5hrs). Terminal 2 for domestic flights.</div>
+          <div class="transport-cost">
+            <span class="cost-label">Airport to City</span>
+            <span class="cost-value">₹400–₹700 (cab)</span>
+          </div>
+        </div>
+        <div class="transport-card">
+          <div class="transport-icon">🚂</div>
+          <div class="transport-type">By Rail</div>
+          <div class="transport-title">Jaipur Railway Station</div>
+          <div class="transport-details">Well connected to Delhi (5hrs by Shatabdi), Jodhpur (5hrs), Mumbai (18hrs). Pre-paid autos available outside station.</div>
+          <div class="transport-cost">
+            <span class="cost-label">Station to Hotel</span>
+            <span class="cost-value">₹80–₹200 (auto)</span>
+          </div>
+        </div>
+        <div class="transport-card">
+          <div class="transport-icon">🚌</div>
+          <div class="transport-type">Local Transport</div>
+          <div class="transport-title">Bus / Metro / Auto</div>
+          <div class="transport-details">City buses cover major routes (₹10–₹30). Autos easily available. App-based cabs (Ola/Uber) reliable. No metro yet — bus is best for budget travel.</div>
+          <div class="transport-cost">
+            <span class="cost-label">Avg Local Trip</span>
+            <span class="cost-value">₹50–₹150</span>
+          </div>
+        </div>
+        <div class="transport-card">
+          <div class="transport-icon">🛺</div>
+          <div class="transport-type">Rickshaw & Taxi</div>
+          <div class="transport-title">Cycle Rickshaw & E-Rickshaw</div>
+          <div class="transport-details">Best for Old City navigation. Cycle rickshaws are iconic — negotiate before boarding. E-rickshaws available near major tourist spots.</div>
+          <div class="transport-cost">
+            <span class="cost-label">Short Ride</span>
+            <span class="cost-value">₹20–₹60</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURE 5: HIDDEN GEMS
+  ============================================================ -->
+  <section id="hidden-gems">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">✦ Off the Beaten Path</span>
+        <h2 class="section-title">Hidden <span>Gems</span></h2>
+        <div class="gold-line"></div>
+        <p class="section-sub">Lesser-known treasures that most tourists miss — secret spots only locals know.</p>
+      </div>
+      <div class="gems-grid reveal">
+        <div class="gem-card">
+          <div class="gem-visual" style="background:linear-gradient(135deg,#1a0a3a,#4a1a8a);">🔭
+            <span class="gem-secret-badge">Secret</span>
+          </div>
+          <div class="gem-body">
+            <div class="gem-type">📍 Secret Viewpoint</div>
+            <div class="gem-name">Nahargarh Fort Sunset</div>
+            <div class="gem-desc">Most tourists crowd Amber Fort, but the Nahargarh rampart walk offers a 360° view of Jaipur's pink skyline at golden hour — nearly empty!</div>
+            <div class="gem-footer">
+              <span class="gem-city">📌 Jaipur</span>
+              <span class="badge">Free Entry</span>
+            </div>
+          </div>
+        </div>
+        <div class="gem-card">
+          <div class="gem-visual" style="background:linear-gradient(135deg,#0a2a1a,#1a6a4a);">🌿
+            <span class="gem-secret-badge">Quiet</span>
+          </div>
+          <div class="gem-body">
+            <div class="gem-type">☕ Quiet Cafe</div>
+            <div class="gem-name">Peacock Rooftop, Udaipur</div>
+            <div class="gem-desc">Tucked in a haveli lane with a postcard-perfect view of Lake Pichola and City Palace. No crowds, live sitar music, simple Rajasthani food.</div>
+            <div class="gem-footer">
+              <span class="gem-city">📌 Udaipur</span>
+              <span class="badge">Local Fav</span>
+            </div>
+          </div>
+        </div>
+        <div class="gem-card">
+          <div class="gem-visual" style="background:linear-gradient(135deg,#3a1a0a,#8a4a1a);">🛍
+            <span class="gem-secret-badge">Hidden</span>
+          </div>
+          <div class="gem-body">
+            <div class="gem-type">🛒 Local Market</div>
+            <div class="gem-name">Tripolia Bazaar Lane</div>
+            <div class="gem-desc">Skip Johari Bazaar — Tripolia's inner lanes hide master craftsmen selling silver jewellery, lac bangles and hand-block fabric at half the price.</div>
+            <div class="gem-footer">
+              <span class="gem-city">📌 Jaipur</span>
+              <span class="badge">Best Price</span>
+            </div>
+          </div>
+        </div>
+        <div class="gem-card">
+          <div class="gem-visual" style="background:linear-gradient(135deg,#1a3a5c,#0a6080);">📸
+            <span class="gem-secret-badge">Photo Spot</span>
+          </div>
+          <div class="gem-body">
+            <div class="gem-type">📷 Photography Spot</div>
+            <div class="gem-name">Mehrangarh Blue Steps</div>
+            <div class="gem-desc">A hidden staircase inside Jodhpur's old city painted in 50 shades of blue — an Instagrammer's paradise that even most locals don't know!</div>
+            <div class="gem-footer">
+              <span class="gem-city">📌 Jodhpur</span>
+              <span class="badge">Insta-worthy</span>
+            </div>
+          </div>
+        </div>
+        <div class="gem-card">
+          <div class="gem-visual" style="background:linear-gradient(135deg,#0a3a2a,#1a8a5a);">🌅
+            <span class="gem-secret-badge">Secret</span>
+          </div>
+          <div class="gem-body">
+            <div class="gem-type">🌄 Secret Beach</div>
+            <div class="gem-name">Butterfly Beach, Goa</div>
+            <div class="gem-desc">Accessible only by boat from Agonda, this crescent cove is dolphin territory — arrive at 6am and you'll share it with just the dolphins!</div>
+            <div class="gem-footer">
+              <span class="gem-city">📌 South Goa</span>
+              <span class="badge">Secluded</span>
+            </div>
+          </div>
+        </div>
+        <div class="gem-card">
+          <div class="gem-visual" style="background:linear-gradient(135deg,#2a0a3a,#7a1a5a);">✨
+            <span class="gem-secret-badge">Local</span>
+          </div>
+          <div class="gem-body">
+            <div class="gem-type">🎭 Local Experience</div>
+            <div class="gem-name">Galta Ji Monkey Temple</div>
+            <div class="gem-desc">A 5km trek from Jaipur through Aravalli hills reveals a 17th-century monkey temple — sacred bathing tanks, 1000 resident monkeys and zero tourist buses!</div>
+            <div class="gem-footer">
+              <span class="gem-city">📌 Jaipur Outskirts</span>
+              <span class="badge">Rare Gem</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURE 7: SEASONAL TRAVEL
+  ============================================================ -->
+  <section id="seasonal">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">✦ Plan by Season</span>
+        <h2 class="section-title">Seasonal <span>Travel</span></h2>
+        <div class="gold-line"></div>
+        <p class="section-sub">The right destination at the right time makes all the difference.</p>
+      </div>
+      <div class="seasons-grid reveal">
+        <div class="season-card season-summer">
+          <div class="season-icon">☀️</div>
+          <div class="season-name">Summer Escapes</div>
+          <div class="season-months">March – June</div>
+          <div class="season-places">
+            <span class="season-place">Shimla</span>
+            <span class="season-place">Manali</span>
+            <span class="season-place">Leh-Ladakh</span>
+            <span class="season-place">Ooty</span>
+            <span class="season-place">Munnar</span>
+          </div>
+        </div>
+        <div class="season-card season-monsoon">
+          <div class="season-icon">🌧</div>
+          <div class="season-name">Monsoon Magic</div>
+          <div class="season-months">July – September</div>
+          <div class="season-places">
+            <span class="season-place">Coorg</span>
+            <span class="season-place">Wayanad</span>
+            <span class="season-place">Cherrapunji</span>
+            <span class="season-place">Lonavala</span>
+          </div>
+        </div>
+        <div class="season-card season-winter">
+          <div class="season-icon">❄️</div>
+          <div class="season-name">Winter Wonders</div>
+          <div class="season-months">October – February</div>
+          <div class="season-places">
+            <span class="season-place">Rajasthan</span>
+            <span class="season-place">Goa</span>
+            <span class="season-place">Kerala</span>
+            <span class="season-place">Rann of Kutch</span>
+          </div>
+        </div>
+        <div class="season-card season-festival">
+          <div class="season-icon">🎆</div>
+          <div class="season-name">Festival Travel</div>
+          <div class="season-months">Year-round</div>
+          <div class="season-places">
+            <span class="season-place">Pushkar Fair</span>
+            <span class="season-place">Diwali Varanasi</span>
+            <span class="season-place">Holi Mathura</span>
+            <span class="season-place">Hornbill Fest</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURE 9: REELS / SHORT VIDEOS
+  ============================================================ -->
+  <section id="reels">
+    <div class="container">
+      <div class="section-header reveal" style="margin-bottom:36px;">
+        <span class="section-label">✦ City Shorts</span>
+        <h2 class="section-title">Travel <span>Reels</span></h2>
+        <div class="gold-line"></div>
+        <p class="section-sub">30-second city guides, food tours, and must-visit spots — swipe and explore.</p>
+      </div>
+    </div>
+    <div class="container" style="max-width:100%;padding-right:0;">
+      <div class="reels-scroll reveal">
+        <div class="reel-card">
+          <div class="reel-visual" style="background:linear-gradient(180deg,#c0392b 0%,#8e44ad 100%);">🏰
+            <div class="reel-overlay"></div>
+            <div class="reel-duration">0:32</div>
+            <div class="reel-play">▶</div>
+            <div class="reel-info">
+              <div class="reel-title">Jaipur in 30 Seconds</div>
+              <div class="reel-city">Jaipur · Rajasthan</div>
+              <div class="reel-views">12.4K views</div>
+            </div>
+          </div>
+        </div>
+        <div class="reel-card">
+          <div class="reel-visual" style="background:linear-gradient(180deg,#0099f1 0%,#27ae60 100%);">🌊
+            <div class="reel-overlay"></div>
+            <div class="reel-duration">0:28</div>
+            <div class="reel-play">▶</div>
+            <div class="reel-info">
+              <div class="reel-title">Best Beaches in Goa</div>
+              <div class="reel-city">Goa · West Coast</div>
+              <div class="reel-views">28.1K views</div>
+            </div>
+          </div>
+        </div>
+        <div class="reel-card">
+          <div class="reel-visual" style="background:linear-gradient(180deg,#f39c12 0%,#d35400 100%);">🍜
+            <div class="reel-overlay"></div>
+            <div class="reel-duration">0:45</div>
+            <div class="reel-play">▶</div>
+            <div class="reel-info">
+              <div class="reel-title">Street Food Guide</div>
+              <div class="reel-city">Delhi · Chandni Chowk</div>
+              <div class="reel-views">44.8K views</div>
+            </div>
+          </div>
+        </div>
+        <div class="reel-card">
+          <div class="reel-visual" style="background:linear-gradient(180deg,#1a6b8a 0%,#16a085 100%);">🏛
+            <div class="reel-overlay"></div>
+            <div class="reel-duration">0:30</div>
+            <div class="reel-play">▶</div>
+            <div class="reel-info">
+              <div class="reel-title">Udaipur Lake Palace</div>
+              <div class="reel-city">Udaipur · Rajasthan</div>
+              <div class="reel-views">19.2K views</div>
+            </div>
+          </div>
+        </div>
+        <div class="reel-card">
+          <div class="reel-visual" style="background:linear-gradient(180deg,#2980b9 0%,#6dd5fa 50%,#2980b9 100%);">⛰
+            <div class="reel-overlay"></div>
+            <div class="reel-duration">0:38</div>
+            <div class="reel-play">▶</div>
+            <div class="reel-info">
+              <div class="reel-title">Manali Winter Trip</div>
+              <div class="reel-city">Manali · Himachal</div>
+              <div class="reel-views">31.5K views</div>
+            </div>
+          </div>
+        </div>
+        <div class="reel-card">
+          <div class="reel-visual" style="background:linear-gradient(180deg,#7b2d00 0%,#f39c12 100%);">🪔
+            <div class="reel-overlay"></div>
+            <div class="reel-duration">0:35</div>
+            <div class="reel-play">▶</div>
+            <div class="reel-info">
+              <div class="reel-title">Varanasi Ganga Aarti</div>
+              <div class="reel-city">Varanasi · UP</div>
+              <div class="reel-views">52.3K views</div>
+            </div>
+          </div>
+        </div>
+        <div class="reel-card">
+          <div class="reel-visual" style="background:linear-gradient(180deg,#0a3320 0%,#27ae60 100%);">🌿
+            <div class="reel-overlay"></div>
+            <div class="reel-duration">0:42</div>
+            <div class="reel-play">▶</div>
+            <div class="reel-info">
+              <div class="reel-title">Kerala Backwaters</div>
+              <div class="reel-city">Alleppey · Kerala</div>
+              <div class="reel-views">23.7K views</div>
+            </div>
+          </div>
+        </div>
+        <div class="reel-card">
+          <div class="reel-visual" style="background:linear-gradient(180deg,#4a0a6e 0%,#8b1a9a 100%);">❄
+            <div class="reel-overlay"></div>
+            <div class="reel-duration">0:29</div>
+            <div class="reel-play">▶</div>
+            <div class="reel-info">
+              <div class="reel-title">Leh-Ladakh Road Trip</div>
+              <div class="reel-city">Ladakh · J&K</div>
+              <div class="reel-views">67.9K views</div>
+            </div>
+          </div>
+        </div>
+        <a href="https://www.instagram.com/reel/DV22tISEjVm/" target="_blank">
+        <div class="reel-card">
+          <div class="reel-visual" style="background:linear-gradient(180deg,#e74c3c 0%,#f39c12 100%);">🏰
+            <div class="reel-overlay"></div>
+            <div class="reel-duration">0:35</div>
+            <div class="reel-play">▶</div>
+            <div class="reel-info">
+              <div class="reel-title">Hawa Mahal Magic</div>
+              <div class="reel-city">Jaipur · Rajasthan</div>
+              <div class="reel-views">89.2K views</div>
+            </div>
+          </div>
+        </div>
+        </a>
+        <a href="https://www.instagram.com/reel/CmbzxNyhxXF/" target="_blank">
+        <div class="reel-card">
+          <div class="reel-visual" style="background:linear-gradient(180deg,#27ae60 0%,#2ecc71 100%);">🏛
+            <div class="reel-overlay"></div>
+            <div class="reel-duration">0:42</div>
+            <div class="reel-play">▶</div>
+            <div class="reel-info">
+              <div class="reel-title">City Palace Secrets</div>
+              <div class="reel-city">Jaipur · Rajasthan</div>
+              <div class="reel-views">76.5K views</div>
+            </div>
+          </div>
+        </div>
+        </a>
+        <a href="https://www.instagram.com/reel/DCn-znliUaq/" target="_blank">
+        <div class="reel-card">
+          <div class="reel-visual" style="background:linear-gradient(180deg,#8e44ad 0%,#9b59b6 100%);">🌅
+            <div class="reel-overlay"></div>
+            <div class="reel-duration">0:38</div>
+            <div class="reel-play">▶</div>
+            <div class="reel-info">
+              <div class="reel-title">Amber Fort Sunrise</div>
+              <div class="reel-city">Jaipur · Rajasthan</div>
+              <div class="reel-views">95.1K views</div>
+            </div>
+          </div>
+        </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURE 8: USER REVIEWS
+  ============================================================ -->
+  <section id="reviews">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">✦ Community</span>
+        <h2 class="section-title">Traveller <span>Reviews</span></h2>
+        <div class="gold-line"></div>
+        <p class="section-sub">Real stories from real travellers who explored India with Smart Trip.</p>
+      </div>
+      <div class="reviews-grid reveal">
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-header">
+            <div class="review-avatar">A</div>
+            <div>
+              <div class="review-name">Ananya Sharma</div>
+              <div class="review-place">📌 Jaipur Trip · Solo</div>
+            </div>
+          </div>
+          <div class="review-stars"><span class="stars">★★★★★</span></div>
+          <div class="review-text">Smart Trip's itinerary was so spot-on that I felt like I had a personal local guide. The hidden gem at Nahargarh at sunset was absolutely magical — no crowds and a view that took my breath away!</div>
+          <div class="review-date">March 2025</div>
+        </div>
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-header">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#1a9fa8,#16a085);">R</div>
+            <div>
+              <div class="review-name">Rohit & Priya</div>
+              <div class="review-place">📌 Udaipur · Couple</div>
+            </div>
+          </div>
+          <div class="review-stars"><span class="stars">★★★★★</span></div>
+          <div class="review-text">Our honeymoon trip to Udaipur was pure magic. The hotel recommendation — Leela Palace — was absolutely worth every rupee. We cried a little at checkout!</div>
+          <div class="review-date">January 2025</div>
+        </div>
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-header">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#e74c3c,#c0392b);">M</div>
+            <div>
+              <div class="review-name">Mohit Verma</div>
+              <div class="review-place">📌 Goa · Friends Trip</div>
+            </div>
+          </div>
+          <div class="review-stars"><span class="stars">★★★★</span><span style="color:var(--text-muted)">★</span></div>
+          <div class="review-text">We used the Goa Friends Getaway itinerary and it was perfect for our group of 8. Budget was spot on and the restaurant tips saved us from tourist traps. Will use again!</div>
+          <div class="review-date">February 2025</div>
+        </div>
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-header">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#27ae60,#1abc9c);">S</div>
+            <div>
+              <div class="review-name">Sanya Kapoor</div>
+              <div class="review-place">📌 Shimla · Family</div>
+            </div>
+          </div>
+          <div class="review-stars"><span class="stars">★★★★★</span></div>
+          <div class="review-text">Planned our family Shimla trip entirely through Smart Trip. The transport guide was incredibly accurate and saved us so much confusion at the railway station. 10/10 would recommend!</div>
+          <div class="review-date">December 2024</div>
+        </div>
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-header">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#9b59b6,#6c3483);">V</div>
+            <div>
+              <div class="review-name">Vijay Nair</div>
+              <div class="review-place">📌 Kerala Backwaters</div>
+            </div>
+          </div>
+          <div class="review-stars"><span class="stars">★★★★★</span></div>
+          <div class="review-text">Kerala backwater houseboat was booked through Smart Trip deals section — got 25% off! The experience was divine. The food guide led us to a tiny toddy shop with the best fish curry ever.</div>
+          <div class="review-date">November 2024</div>
+        </div>
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-header">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#f39c12,#d35400);">K</div>
+            <div>
+              <div class="review-name">Kriti Patel</div>
+              <div class="review-place">📌 Varanasi · Solo</div>
+            </div>
+          </div>
+          <div class="review-stars"><span class="stars">★★★★★</span></div>
+          <div class="review-text">Visiting Varanasi solo was intimidating but Smart Trip's day-by-day guide made it seamless. The Ganga Aarti at Dashashwamedh Ghat at 6am (their tip!) with no crowd — life-changing.</div>
+          <div class="review-date">October 2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURE 10: DEALS & OFFERS
+  ============================================================ -->
+  <section id="deals">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">✦ Limited Time</span>
+        <h2 class="section-title">Deals & <span>Offers</span></h2>
+        <div class="gold-line"></div>
+        <p class="section-sub">Exclusive discounts on hotels, packages, and experiences — grab them before they expire!</p>
+      </div>
+      <div class="deals-grid reveal">
+        <div class="deal-card">
+          <div class="deal-banner" style="background:linear-gradient(135deg,#c0392b,#8e44ad);">🏰
+            <span class="deal-discount">35% OFF</span>
+            <div class="deal-timer">⏱ 2d 14h left</div>
+          </div>
+          <div class="deal-body">
+            <div class="deal-type">Hotel Deal</div>
+            <div class="deal-name">Jaipur Heritage Stay</div>
+            <div class="deal-desc">3 nights at The Royal Haveli with complimentary breakfast and heritage walk tour included.</div>
+            <div class="deal-pricing">
+              <span class="deal-original">₹13,500</span>
+              <span class="deal-final">₹8,775</span>
+            </div>
+            <div class="deal-includes">
+              <span class="deal-include">Breakfast</span>
+              <span class="deal-include">Heritage Walk</span>
+              <span class="deal-include">Free WiFi</span>
+              <span class="deal-include">Airport Drop</span>
+            </div>
+            <button class="btn-gold" style="width:100%;">Grab Deal ✦</button>
+          </div>
+        </div>
+        <div class="deal-card">
+          <div class="deal-banner" style="background:linear-gradient(135deg,#0099f7,#27ae60);">🌊
+            <span class="deal-discount">28% OFF</span>
+            <div class="deal-timer">⏱ 5d 8h left</div>
+          </div>
+          <div class="deal-body">
+            <div class="deal-type">Weekend Package</div>
+            <div class="deal-name">Goa Beach Weekend</div>
+            <div class="deal-desc">2N/3D at Baga Beach resort with water sports + sunset cruise. Perfect for couples and friends.</div>
+            <div class="deal-pricing">
+              <span class="deal-original">₹14,000</span>
+              <span class="deal-final">₹10,080</span>
+            </div>
+            <div class="deal-includes">
+              <span class="deal-include">Hotel Stay</span>
+              <span class="deal-include">Water Sports</span>
+              <span class="deal-include">Sunset Cruise</span>
+            </div>
+            <button class="btn-gold" style="width:100%;">Grab Deal ✦</button>
+          </div>
+        </div>
+        <div class="deal-card">
+          <div class="deal-banner" style="background:linear-gradient(135deg,#f7971e,#d4a853);">🏜
+            <span class="deal-discount">40% OFF</span>
+            <div class="deal-timer">⏱ 1d 6h left</div>
+          </div>
+          <div class="deal-body">
+            <div class="deal-type">Budget Trip</div>
+            <div class="deal-name">Golden Triangle Budget</div>
+            <div class="deal-desc">5N/6D Delhi–Agra–Jaipur with budget hotels, guided tours, all transfers. Best value of the year!</div>
+            <div class="deal-pricing">
+              <span class="deal-original">₹22,000</span>
+              <span class="deal-final">₹13,200</span>
+            </div>
+            <div class="deal-includes">
+              <span class="deal-include">3 City Hotels</span>
+              <span class="deal-include">All Transfers</span>
+              <span class="deal-include">Guided Tours</span>
+            </div>
+            <button class="btn-gold" style="width:100%;">Grab Deal ✦</button>
+          </div>
+        </div>
+        <div class="deal-card">
+          <div class="deal-banner" style="background:linear-gradient(135deg,#4a0a6e,#e74c3c);">🎆
+            <span class="deal-discount">20% OFF</span>
+            <div class="deal-timer">⏱ Festival Offer</div>
+          </div>
+          <div class="deal-body">
+            <div class="deal-type">Festival Special</div>
+            <div class="deal-name">Diwali in Jaipur</div>
+            <div class="deal-desc">Experience Diwali in the Pink City — fort light shows, fireworks, royal dinner and cultural performances.</div>
+            <div class="deal-pricing">
+              <span class="deal-original">₹18,500</span>
+              <span class="deal-final">₹14,800</span>
+            </div>
+            <div class="deal-includes">
+              <span class="deal-include">Fort Light Show</span>
+              <span class="deal-include">Royal Dinner</span>
+              <span class="deal-include">Cultural Show</span>
+            </div>
+            <button class="btn-gold" style="width:100%;">Grab Deal ✦</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       NEWSLETTER
+  ============================================================ -->
+  <section id="newsletter">
+    <div class="container">
+      <div class="newsletter-card reveal">
+        <div class="newsletter-icon">✈️</div>
+        <span class="section-label">✦ Stay Updated</span>
+        <h2 class="section-title" style="font-size:clamp(24px,3.5vw,40px);margin-top:12px;">Get <span>Travel Deals</span> First</h2>
+        <p style="color:var(--text-soft);max-width:480px;margin:0 auto;">Weekly curated travel deals, hidden gems, seasonal tips and exclusive offers — delivered to your inbox.</p>
+        <div class="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="your@email.com" id="nl-email" />
+          <button class="btn-gold" onclick="subscribeNewsletter()">Subscribe ✦</button>
+        </div>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:16px;">📩 No spam. Unsubscribe anytime. Loved by 12,000+ travellers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">SMART<span>TRIP</span></div>
+          <p class="footer-desc">India's most trusted travel planning platform. Discover, plan, and experience the incredible diversity of India with curated guides, verified hotels, and expert itineraries.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-btn" title="Instagram">📸</a>
+            <a href="#" class="social-btn" title="Twitter">🐦</a>
+            <a href="#" class="social-btn" title="YouTube">▶</a>
+            <a href="#" class="social-btn" title="Facebook">👥</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Destinations</h4>
+          <ul class="footer-links">
+            <li><a href="#">Rajasthan</a></li>
+            <li><a href="#">Goa</a></li>
+            <li><a href="#">Kerala</a></li>
+            <li><a href="#">Himachal Pradesh</a></li>
+            <li><a href="#">Uttarakhand</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Plan</h4>
+          <ul class="footer-links">
+            <li><a href="#planner">Trip Planner</a></li>
+            <li><a href="#hotels">Hotels</a></li>
+            <li><a href="#food">Food Guide</a></li>
+            <li><a href="#transport">Transport</a></li>
+            <li><a href="#deals">Deals</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 SmartTrip. All rights reserved. Made with ❤️ for Indian travellers.</p>
+        <div class="footer-badges">
+          <span class="footer-badge">🔒 Secure</span>
+          <span class="footer-badge">✓ Verified</span>
+          <span class="footer-badge">⭐ 4.9 Rated</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    /* ===================== NAVBAR ===================== */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    /* ===================== MOBILE MENU ===================== */
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.add('open');
+    });
+    document.getElementById('closeMenu').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.remove('open');
+    });
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+
+    /* ===================== SCROLL REVEAL ===================== */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    /* ===================== TRIP PLANNER ===================== */
+    // Travel type buttons
+    document.querySelectorAll('.type-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    // Itinerary data
+    const itineraryData = {
+      Jaipur: {
+        budget: {
+          title: "2-Day Jaipur Budget Adventure",
+          days: [
+            { label: "Day 1", activities: [
+              { time:"7:00 AM", text:"Chai & kachori at Rawat Mishthan Bhandar (₹30)" },
+              { time:"8:30 AM", text:"Amber Fort – arrive early, skip the queue (₹100)" },
+              { time:"12:00 PM", text:"Dal baati churma lunch at local dhaba (₹120)" },
+              { time:"2:00 PM", text:"Hawa Mahal exterior photo stop (free from street)" },
+              { time:"3:30 PM", text:"Jantar Mantar – UNESCO observatory (₹50)" },
+              { time:"6:00 PM", text:"Nahargarh sunset hike (₹50)" },
+              { time:"8:00 PM", text:"Chokhi Dhani-style dinner at local venue (₹200)" }
+            ]},
+            { label: "Day 2", activities: [
+              { time:"8:00 AM", text:"Jal Mahal sunrise view (free from road)" },
+              { time:"9:30 AM", text:"City Palace + Textile Museum (₹200)" },
+              { time:"1:00 PM", text:"Masala chai + pyaaz kachori break" },
+              { time:"2:30 PM", text:"Tripolia Bazaar shopping & bargaining" },
+              { time:"5:00 PM", text:"Johri Bazaar – silver jewellery window shopping" },
+              { time:"7:00 PM", text:"Rooftop meal with fort views (₹300)" }
+            ]}
+          ]
+        },
+        mid: {
+          title: "3-Day Jaipur Splendour",
+          days: [
+            { label: "Day 1 – Forts & History", activities: [
+              { time:"8:00 AM", text:"Breakfast at hotel" },
+              { time:"9:30 AM", text:"Amber Fort with audio guide (elephant ride optional)" },
+              { time:"1:00 PM", text:"Lunch at 1135 AD inside Amber Fort" },
+              { time:"3:00 PM", text:"Nahargarh Fort + Jaigarh Fort loop" },
+              { time:"7:00 PM", text:"Chokhi Dhani cultural village evening" }
+            ]},
+            { label: "Day 2 – City & Culture", activities: [
+              { time:"9:00 AM", text:"City Palace Museum (royal artifacts)" },
+              { time:"11:30 AM", text:"Hawa Mahal interior tour + rooftop" },
+              { time:"1:30 PM", text:"Bapu Bazaar street lunch" },
+              { time:"3:30 PM", text:"Albert Hall Museum" },
+              { time:"7:00 PM", text:"Rooftop dinner at Dera Rawatsar with fort views" }
+            ]},
+            { label: "Day 3 – Markets & Relax", activities: [
+              { time:"9:00 AM", text:"Jal Mahal sunrise & lakeside walk" },
+              { time:"11:00 AM", text:"Johari Bazaar gems & jewellery" },
+              { time:"1:00 PM", text:"Rajasthani thali at Suvarna Mahal" },
+              { time:"3:00 PM", text:"Spa at hotel" },
+              { time:"6:00 PM", text:"Sunset cocktails at rooftop bar" }
+            ]}
+          ]
+        },
+        luxury: {
+          title: "5-Day Royal Jaipur Experience",
+          days: [
+            { label: "Day 1 – Arrival", activities: [
+              { time:"Arrival", text:"Private airport pickup by heritage jeep" },
+              { time:"3:00 PM", text:"Check-in: Jai Mahal Palace" },
+              { time:"7:00 PM", text:"Welcome dinner – traditional Rajasthani thali" }
+            ]},
+            { label: "Day 2 – Forts", activities: [
+              { time:"9:00 AM", text:"Private Amber Fort tour with historian guide" },
+              { time:"1:00 PM", text:"Lunch inside Amber Fort at heritage restaurant" },
+              { time:"4:00 PM", text:"Nahargarh sunset with champagne viewing" }
+            ]},
+            { label: "Day 3 – Culture", activities: [
+              { time:"9:00 AM", text:"Private City Palace tour with royal family access" },
+              { time:"1:00 PM", text:"Fine dining at 1135 AD" },
+              { time:"4:00 PM", text:"Block printing / pottery masterclass" },
+              { time:"8:00 PM", text:"Candlelit dinner under the stars" }
+            ]},
+            { label: "Day 4 – Day Trip", activities: [
+              { time:"8:00 AM", text:"Ranthambore Tiger Reserve day trip" },
+              { time:"7:00 PM", text:"Return, spa treatment at hotel" }
+            ]},
+            { label: "Day 5 – Departure", activities: [
+              { time:"9:00 AM", text:"Gemstone shopping – private showroom access" },
+              { time:"1:00 PM", text:"Farewell lunch at hotel" },
+              { time:"4:00 PM", text:"Heritage jeep airport transfer" }
+            ]}
+          ]
+        }
+      },
+      Delhi: {
+        mid: {
+          title: "3-Day Delhi Heritage Trail",
+          days: [
+            { label: "Day 1 – Old Delhi", activities: [
+              { time:"8:00 AM", text:"Jama Masjid – sunrise walk" },
+              { time:"10:00 AM", text:"Red Fort guided tour" },
+              { time:"1:00 PM", text:"Paranthe Wali Gali lunch" },
+              { time:"3:00 PM", text:"Chandni Chowk bazaar walk" },
+              { time:"7:00 PM", text:"Karim's dinner – 100+ year old Mughal restaurant" }
+            ]},
+            { label: "Day 2 – New Delhi", activities: [
+              { time:"9:00 AM", text:"Humayun's Tomb (UNESCO)" },
+              { time:"11:30 AM", text:"Lodhi Garden walk" },
+              { time:"1:30 PM", text:"Khan Market lunch" },
+              { time:"3:00 PM", text:"India Gate + Rashtrapati Bhavan" },
+              { time:"7:00 PM", text:"Connaught Place dinner" }
+            ]},
+            { label: "Day 3 – Spiritual & Markets", activities: [
+              { time:"9:00 AM", text:"Lotus Temple + Akshardham" },
+              { time:"2:00 PM", text:"Sarojini Nagar shopping" },
+              { time:"5:00 PM", text:"Hauz Khas Village – cafes & nightlife" }
+            ]}
+          ]
+        }
+      },
+      Goa: {
+        budget: {
+          title: "4-Day Goa Budget Beach Trip",
+          days: [
+            { label: "Day 1 – North Goa", activities: [
+              { time:"10:00 AM", text:"Check-in hostel, freshen up" },
+              { time:"12:00 PM", text:"Calangute Beach – swim & sunbathe" },
+              { time:"4:00 PM", text:"Baga beach walk & local shacks" },
+              { time:"7:00 PM", text:"Tito's Lane street food & nightlife" }
+            ]},
+            { label: "Day 2 – Heritage", activities: [
+              { time:"9:00 AM", text:"Old Goa – Basilica of Bom Jesus" },
+              { time:"11:00 AM", text:"Fontainhas – Portuguese heritage quarter" },
+              { time:"1:00 PM", text:"Fish curry rice at family restaurant" },
+              { time:"3:00 PM", text:"Anjuna flea market" }
+            ]},
+            { label: "Day 3 – South Goa", activities: [
+              { time:"9:00 AM", text:"Colva Beach (peaceful, less crowded)" },
+              { time:"12:00 PM", text:"Agonda Beach boat to Butterfly Beach" },
+              { time:"5:00 PM", text:"Palolem sunset – most beautiful in Goa" }
+            ]},
+            { label: "Day 4 – Departure", activities: [
+              { time:"8:00 AM", text:"Sunrise swim at Palolem" },
+              { time:"10:00 AM", text:"Spice plantation tour (₹400)" },
+              { time:"2:00 PM", text:"Final Goan meal + cashew feni tasting" }
+            ]}
+          ]
+        }
+      }
+    };
+
+    let selectedType = 'Solo';
+    document.querySelectorAll('.type-btn').forEach(btn => {
+      btn.addEventListener('click', () => { selectedType = btn.dataset.type; });
+    });
+
+    function generateItinerary() {
+      const city = document.getElementById('pl-city').value;
+      const budget = document.getElementById('pl-budget').value;
+      const days = document.getElementById('pl-days').value;
+
+      if (!city || !budget || !days) {
+        alert('Please fill all fields to generate your itinerary!');
+        return;
+      }
+
+      const result = document.getElementById('itinerary-result');
+      const daysContainer = document.getElementById('itin-days');
+      const badge = document.getElementById('itin-badge');
+      const title = document.getElementById('itin-title');
+      const budgetBadge = document.getElementById('itin-budget-badge');
+
+      // Find matching data or fallback
+      const cityData = itineraryData[city] || itineraryData['Jaipur'];
+      const budgetKey = budget === 'budget' ? 'budget' : budget === 'luxury' ? 'luxury' : 'mid';
+      const itin = cityData[budgetKey] || cityData['mid'] || Object.values(cityData)[0];
+
+      badge.textContent = `${selectedType} · ${city}`;
+      title.textContent = itin.title;
+      budgetBadge.textContent = budget === 'budget' ? '₹ Budget' : budget === 'luxury' ? '👑 Luxury' : '⭐ Mid-Range';
+
+      daysContainer.innerHTML = itin.days.map(day => `
+        <div class="day-card">
+          <div class="day-label">${day.label}</div>
+          <div class="day-activities">
+            ${day.activities.map(a => `
+              <div class="activity">
+                <span class="activity-time">${a.time}</span>
+                <span>${a.text}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      result.style.display = 'block';
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function clearPlanner() {
+      document.getElementById('pl-city').value = '';
+      document.getElementById('pl-budget').value = '';
+      document.getElementById('pl-days').value = '';
+      document.getElementById('itinerary-result').style.display = 'none';
+    }
+
+    /* ===================== PRE-BUILT ITINERARIES ===================== */
+    const prebuilt = {
+      jaipur2: { city: 'Jaipur', budget: 'budget', days: '2' },
+      delhi3:  { city: 'Delhi',  budget: 'mid',    days: '3' },
+      raj5:    { city: 'Jaipur', budget: 'luxury',  days: '5' },
+      goa4:    { city: 'Goa',    budget: 'budget',  days: '4' }
+    };
+    function loadPrebuiltItinerary(key) {
+      const d = prebuilt[key];
+      document.getElementById('pl-city').value = d.city;
+      document.getElementById('pl-budget').value = d.budget;
+      document.getElementById('pl-days').value = d.days;
+      document.getElementById('planner').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(generateItinerary, 600);
+    }
+
+    /* ===================== HOTEL FILTER ===================== */
+    function filterHotels(tier, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.hotel-card').forEach(card => {
+        card.style.display = (tier === 'all' || card.dataset.tier === tier) ? 'block' : 'none';
+      });
+    }
+
+    /* ===================== FOOD FILTER ===================== */
+    function filterFood(type, btn) {
+      document.querySelectorAll('.food-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.food-card').forEach(card => {
+        card.style.display = card.dataset.food === type ? 'block' : 'none';
+      });
+    }
+
+    /* ===================== TRANSPORT SWITCH ===================== */
+    const transportInfo = {
+      jaipur: [
+        { icon:'✈️', type:'By Air', title:'Jaipur International Airport', details:'13km from city. Flights from Delhi (1hr), Mumbai (2hrs). Terminal 2 domestic.', costLabel:'Airport to City', costValue:'₹400–₹700 (cab)' },
+        { icon:'🚂', type:'By Rail', title:'Jaipur Railway Station', details:'Connected to Delhi (5hrs Shatabdi), Jodhpur (5hrs), Mumbai (18hrs). Pre-paid autos outside.', costLabel:'Station to Hotel', costValue:'₹80–₹200 (auto)' },
+        { icon:'🚌', type:'Local Transport', title:'Bus / Auto / Cab', details:'City buses ₹10–₹30. Ola/Uber reliable. No metro yet.', costLabel:'Avg Local Trip', costValue:'₹50–₹150' },
+        { icon:'🛺', type:'Rickshaw', title:'Cycle & E-Rickshaw', details:'Best for Old City. Negotiate before boarding. E-rickshaws near tourist spots.', costLabel:'Short Ride', costValue:'₹20–₹60' }
+      ],
+      delhi: [
+        { icon:'✈️', type:'By Air', title:'Indira Gandhi Intl Airport', details:'T3 for international & domestic. Connected to city by Airport Express Metro (20 mins, ₹60).', costLabel:'Airport to City', costValue:'₹60 (metro) / ₹500–₹800 (cab)' },
+        { icon:'🚂', type:'By Rail', title:'New Delhi / Hazrat Nizamuddin', details:'Main stations. Trains to all major cities. Book 60-90 days in advance on IRCTC.', costLabel:'Station to Centre', costValue:'₹100–₹200 (metro/cab)' },
+        { icon:'🚇', type:'Metro', title:'Delhi Metro (DMRC)', details:'Best way to get around. 390+ stations across 12 lines. QR token or metro card.', costLabel:'Per Ride', costValue:'₹10–₹60' },
+        { icon:'🚕', type:'Taxi', title:'Ola / Uber / Auto', details:'App cabs everywhere. CNG autos use meter – insist on it! Surge pricing post midnight.', costLabel:'Short Cab Ride', costValue:'₹80–₹200' }
+      ],
+      goa: [
+        { icon:'✈️', type:'By Air', title:'Goa International Airport', details:'Dabolim (South, military airport) or new Mopa airport (North). 30-45km from beaches.', costLabel:'Airport to Beach', costValue:'₹600–₹1,200 (cab)' },
+        { icon:'🚂', type:'By Rail', title:'Madgaon / Thivim Station', details:'Madgaon (South Goa), Thivim (North). Konkan Railway connects Mumbai & Mangalore.', costLabel:'Station to Beach', costValue:'₹300–₹600 (cab)' },
+        { icon:'🏍', type:'Rent a Bike', title:'Scooter / Motorcycle', details:'Best way to explore Goa! Rent at ₹300–₹500/day. Need valid driving licence.', costLabel:'Scooter Rental', costValue:'₹300–₹500/day' },
+        { icon:'🚌', type:'Local Kadamba Bus', title:'Government Bus', details:'Connects Panaji, Margao, Mapusa. Cheap (₹10–₹40) but less frequent. Good for budget travel.', costLabel:'Bus Ride', costValue:'₹10–₹40' }
+      ]
+    };
+
+    function switchTransport(city, btn) {
+      document.querySelectorAll('.transport-city-tabs .filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const info = transportInfo[city];
+      document.getElementById('transportContent').innerHTML = info.map(t => `
+        <div class="transport-card">
+          <div class="transport-icon">${t.icon}</div>
+          <div class="transport-type">${t.type}</div>
+          <div class="transport-title">${t.title}</div>
+          <div class="transport-details">${t.details}</div>
+          <div class="transport-cost">
+            <span class="cost-label">${t.costLabel}</span>
+            <span class="cost-value">${t.costValue}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ===================== NEWSLETTER ===================== */
+    function subscribeNewsletter() {
+      const email = document.getElementById('nl-email').value;
+      const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailReg.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      const btn = document.querySelector('.newsletter-form .btn-gold');
+      btn.textContent = '✓ Subscribed!';
+      btn.style.background = 'linear-gradient(135deg, #27ae60, #1abc9c)';
+      document.getElementById('nl-email').value = '';
+      setTimeout(() => {
+        btn.textContent = 'Subscribe ✦';
+        btn.style.background = '';
+      }, 4000);
+    }
+
+    /* ===================== DEAL TIMERS ===================== */
+    function updateDealTimers() {
+      const timers = [
+        { el: 0, hours: 62 },  // 2d 14h
+        { el: 1, hours: 128 }, // 5d 8h
+        { el: 2, hours: 30 },  // 1d 6h
+      ];
+    }
+
+    /* ===================== LAZY IMAGES ===================== */
+    if ('IntersectionObserver' in window) {
+      const lazyBgs = document.querySelectorAll('[data-bg]');
+      const bgObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.style.backgroundImage = `url(${e.target.dataset.bg})`;
+            bgObserver.unobserve(e.target);
+          }
+        });
+      });
+      lazyBgs.forEach(el => bgObserver.observe(el));
+    }
+
+    /* ===================== SMOOTH ACTIVE NAV ===================== */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 200) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--gold)' : '';
+      });
+    });
+
+    /* ===================== API DATA FETCHING ===================== */
+    const API_BASE = 'https://smarttrip-backend-vuzk.onrender.com';
+
+    // Fetch and populate hotels
+    async function loadHotels() {
+      try {
+        const response = await fetch(`${API_BASE}/hotels`);
+        const hotels = await response.json();
+        const hotelsGrid = document.getElementById('hotelsGrid');
+
+        if (hotels.length === 0) return;
+
+        hotelsGrid.innerHTML = hotels.map(hotel => {
+          const tier = hotel.tier || 'mid';
+          const tierBadge = tier === 'luxury' ? '<span class="badge" style="background:rgba(212,168,83,0.25);color:#f0c878;">Luxury</span>' :
+                           tier === 'budget' ? '<span class="badge">Budget</span>' :
+                           '<span class="badge" style="background:rgba(26,159,168,0.2);color:#26c6d0;">Mid-Range</span>';
+
+          return `
+            <div class="hotel-card" data-tier="${tier}">
+              <div class="hotel-img" style="background:linear-gradient(135deg,#1a2a3a,#2a4060);">
+                <span class="hotel-tier">${tierBadge}</span>
+              </div>
+              <div class="hotel-body">
+                <div class="hotel-name">${hotel.name}</div>
+                <div class="hotel-location">📍 ${hotel.location}</div>
+                <div class="hotel-rating">
+                  <span class="stars">${'★'.repeat(Math.floor(hotel.rating))}</span>
+                  <span>${hotel.rating}</span>
+                  <span class="count">(328 reviews)</span>
+                </div>
+                <div class="hotel-amenities">
+                  ${hotel.amenities.map(amenity => `<span class="amenity">${amenity}</span>`).join('')}
+                </div>
+                <div class="hotel-footer">
+                  <div class="hotel-price">
+                    <div class="per-night">per night</div>
+                    <div class="amount">${hotel.price}</div>
+                  </div>
+                  <button class="btn-gold" style="padding:9px 18px;font-size:11px;">Book Now</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (error) {
+        console.error('Error loading hotels:', error);
+      }
+    }
+
+    // Fetch and populate food
+    async function loadFood() {
+      try {
+        const response = await fetch(`${API_BASE}/food`);
+        const foods = await response.json();
+        const foodGrid = document.getElementById('foodGrid');
+
+        if (foods.length === 0) return;
+
+        foodGrid.innerHTML = foods.map(food => {
+          const category = food.category || 'restaurant';
+          const displayCategory = category.charAt(0).toUpperCase() + category.slice(1);
+
+          return `
+            <div class="food-card" data-food="${category}">
+              <div class="food-img" style="background:linear-gradient(135deg,#1a2a3a,#2a4060);">${food.image || '🍜'}</div>
+              <div class="food-body">
+                <div class="food-category">${displayCategory}</div>
+                <div class="food-name">${food.name}</div>
+                <div class="food-desc">${food.description}</div>
+                <div class="food-meta">
+                  <span class="food-price">${food.price}</span>
+                  <span class="food-rating">⭐ ${food.rating}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (error) {
+        console.error('Error loading food:', error);
+      }
+    }
+
+    // Fetch and populate transport
+    async function loadTransport() {
+      try {
+        const response = await fetch(`${API_BASE}/transport`);
+        const transports = await response.json();
+
+        if (transports.length === 0) return;
+
+        // Group by city
+        const transportByCity = {};
+        transports.forEach(transport => {
+          const city = transport.city || 'jaipur';
+          if (!transportByCity[city]) transportByCity[city] = [];
+          transportByCity[city].push({
+            icon: transport.type === 'air' ? '✈️' : transport.type === 'rail' ? '🚂' : transport.type === 'bus' ? '🚌' : '🚗',
+            type: transport.type.charAt(0).toUpperCase() + transport.type.slice(1),
+            title: transport.title,
+            details: transport.details,
+            costLabel: 'Cost',
+            costValue: transport.cost
+          });
+        });
+
+        // Update transport info object
+        Object.keys(transportByCity).forEach(city => {
+          transportInfo[city.toLowerCase()] = transportByCity[city];
+        });
+      } catch (error) {
+        console.error('Error loading transport:', error);
+      }
+    }
+
+    // Fetch and populate deals
+    async function loadDeals() {
+      try {
+        const response = await fetch(`${API_BASE}/deals`);
+        const deals = await response.json();
+        const dealsGrid = document.querySelector('.deals-grid');
+
+        if (deals.length === 0) return;
+
+        dealsGrid.innerHTML = deals.map(deal => `
+          <div class="deal-card">
+            <div class="deal-banner" style="background:linear-gradient(135deg,#c0392b,#8e44ad);">
+              <span class="deal-discount">${deal.discount}</span>
+              <div class="deal-timer">⏱ ${deal.timer}</div>
+            </div>
+            <div class="deal-body">
+              <div class="deal-type">${deal.type}</div>
+              <div class="deal-name">${deal.name}</div>
+              <div class="deal-desc">${deal.description}</div>
+              <div class="deal-pricing">
+                <span class="deal-original">${deal.originalPrice}</span>
+                <span class="deal-final">${deal.discountedPrice}</span>
+              </div>
+              <div class="deal-includes">
+                <span class="deal-include">Special Offer</span>
+                <span class="deal-include">Limited Time</span>
+              </div>
+              <button class="btn-gold" style="width:100%;">Grab Deal ✦</button>
+            </div>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('Error loading deals:', error);
+      }
+    }
+
+    // Fetch and populate hidden gems (places)
+    async function loadHiddenGems() {
+      try {
+        const response = await fetch(`${API_BASE}/places`);
+        const places = await response.json();
+        const gemsGrid = document.querySelector('.gems-grid');
+
+        if (places.length === 0) return;
+
+        // Filter for hidden gems or attractions that could be considered gems
+        const gems = places.filter(place => place.category === 'attractions' || place.category === 'food').slice(0, 6);
+
+        if (gems.length === 0 && places.length > 0) {
+          // Use first 6 places as gems
+          gems.push(...places.slice(0, 6));
+        }
+
+        gemsGrid.innerHTML = gems.map(gem => `
+          <div class="gem-card">
+            <div class="gem-visual" style="background:linear-gradient(135deg,#1a0a3a,#4a1a8a);">
+              <span class="gem-secret-badge">Hidden</span>
+            </div>
+            <div class="gem-body">
+              <div class="gem-type">📍 ${gem.category || 'Hidden Gem'}</div>
+              <div class="gem-name">${gem.name}</div>
+              <div class="gem-desc">${gem.description}</div>
+              <div class="gem-footer">
+                <span class="gem-city">📌 ${gem.city || 'Jaipur'}</span>
+                <span class="badge">${gem.entryFee === 0 ? 'Free' : 'Paid'}</span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('Error loading hidden gems:', error);
+      }
+    }
+
+    // Load all data on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      loadHotels();
+      loadFood();
+      loadTransport();
+      loadDeals();
+      loadHiddenGems();
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
