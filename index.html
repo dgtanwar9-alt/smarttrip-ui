@@ -2816,7 +2816,7 @@
     // Fetch and populate hotels
     async function loadHotels() {
       try {
-        const response = await fetch(`${API_BASE}/hotels`);
+        const response = await fetch(`${API_BASE}/api/hotels`);
         const hotels = await response.json();
         const hotelsGrid = document.getElementById('hotelsGrid');
 
@@ -2863,7 +2863,7 @@
     // Fetch and populate food
     async function loadFood() {
       try {
-        const response = await fetch(`${API_BASE}/food`);
+        const response = await fetch(`${API_BASE}/api/food`);
         const foods = await response.json();
         const foodGrid = document.getElementById('foodGrid');
 
@@ -2896,7 +2896,7 @@
     // Fetch and populate transport
     async function loadTransport() {
       try {
-        const response = await fetch(`${API_BASE}/transport`);
+        const response = await fetch(`${API_BASE}/api/transport`);
         const transports = await response.json();
 
         if (transports.length === 0) return;
@@ -2928,7 +2928,7 @@
     // Fetch and populate deals
     async function loadDeals() {
       try {
-        const response = await fetch(`${API_BASE}/deals`);
+        const response = await fetch(`${API_BASE}/api/deals`);
         const deals = await response.json();
         const dealsGrid = document.querySelector('.deals-grid');
 
@@ -2964,7 +2964,7 @@
     // Fetch and populate hidden gems (places)
     async function loadHiddenGems() {
       try {
-        const response = await fetch(`${API_BASE}/places`);
+        const response = await fetch(`${API_BASE}/api/places`);
         const places = await response.json();
         const gemsGrid = document.querySelector('.gems-grid');
 
