@@ -2864,7 +2864,7 @@
     // Fetch and populate food
     async function loadFood() {
       try {
-        const response = await fetch(`${API_BASE}/api/food`);
+        const response = await fetch(`${API_BASE}/api/restaurants`);
         const result = await response.json();
         const foods = result.data || [];
         const foodGrid = document.getElementById('foodGrid');
@@ -2898,7 +2898,7 @@
     // Fetch and populate transport
     async function loadTransport() {
       try {
-        const response = await fetch(`${API_BASE}/api/transport`);
+        const response = await fetch(`${API_BASE}/api/trip`);
         const result = await response.json();
         const transports = result.data || [];
 
@@ -2931,7 +2931,7 @@
     // Fetch and populate deals
     async function loadDeals() {
       try {
-        const response = await fetch(`${API_BASE}/api/deals`);
+        const response = await fetch(`${API_BASE}/api/packages`);
         const result = await response.json();
         const deals = result.data || [];
         const dealsGrid = document.querySelector('.deals-grid');
